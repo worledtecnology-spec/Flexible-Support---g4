@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>المحتوى التعليمي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:   #1b6b5a;
+  --primary-d: #1b4a4a;
+  --accent:    #0a8545;
+  --teal:      #0f766e;
+  --nav-bg:    #1b5e5e;
+  --border:    #d1fae5;
+  --text:      #1f2937;
+  --muted:     #6b7280;
+  --bg:        #f0f4f4;
+  --white:     #ffffff;
+  --sidebar-w: 260px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-family: 'Cairo', sans-serif; }
+body { display: flex; flex-direction: column; height: 100vh; overflow: hidden; background: var(--bg); color: var(--text); }
+
+/* HEADER */
+.header { background: var(--primary-d); padding: 7px 20px; text-align: center; position: relative; border-bottom: 2px solid #14b8a6; flex-shrink: 0; }
+.header-title { font-size: 16px; font-weight: 700; color: #fff; max-width: 72%; margin: 0 auto; line-height: 1.5; }
+.support-badge { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); background: var(--accent); color: #fff; padding: 2px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+
+/* NAV */
+.nav { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; background: var(--nav-bg); padding: 6px 14px; border-bottom: 2px solid var(--teal); flex-shrink: 0; }
+.nav a { color: #e0f2f1; text-decoration: none; font-size: 12px; font-weight: 700; padding: 4px 11px; border-radius: 50px; border: 2px solid rgba(167,243,208,.4); transition: all .2s; }
+.nav a:hover { background: #fff; color: #1b5e5e; }
+
+/* LAYOUT */
+.main { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); background: var(--white); border-left: 3px solid var(--primary); overflow-y: auto; flex-shrink: 0; display: flex; flex-direction: column; }
+.module-title { background: linear-gradient(135deg, var(--primary-d), var(--teal)); color: #fff; text-align: center; padding: 11px 8px; font-size: 13px; font-weight: 800; border-bottom: 2px solid #2dd4bf; position: sticky; top: 0; z-index: 5; }
+.module-title small { display: block; font-size: 10px; font-weight: 400; opacity: .8; margin-top: 2px; }
+.lessons-list { padding: 7px; display: flex; flex-direction: column; gap: 4px; }
+.lesson-group { border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+.lesson-header { display: flex; align-items: center; gap: 7px; background: #f8fafc; padding: 8px 11px; cursor: pointer; border-bottom: 1px solid transparent; user-select: none; transition: background .2s; }
+.lesson-header:hover { background: #ecfdf5; }
+.lesson-header.open  { background: #d1fae5; border-bottom-color: #a7f3d0; }
+.lesson-icon { width: 28px; height: 28px; border-radius: 7px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+.lesson-header.open .lesson-icon { background: var(--accent); }
+.lesson-title { flex: 1; font-size: 12px; font-weight: 700; color: var(--primary-d); line-height: 1.4; }
+.chevron { font-size: 10px; color: var(--muted); transition: transform .25s; }
+.lesson-header.open .chevron { transform: rotate(180deg); }
+.lesson-sub { display: none; flex-direction: column; background: var(--white); padding: 3px 5px; gap: 2px; }
+.sub-btn { display: flex; align-items: center; gap: 7px; background: transparent; border: 1px solid transparent; border-radius: 7px; padding: 6px 9px; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: 600; color: var(--muted); text-align: right; transition: all .2s; width: 100%; }
+.sub-btn:hover  { background: #f0fdf4; color: var(--primary); border-color: #a7f3d0; }
+.sub-btn.active { background: var(--primary); color: #fff; font-weight: 700; box-shadow: 0 2px 8px rgba(27,107,90,.25); }
+.sub-btn .bico  { width: 20px; height: 20px; border-radius: 5px; background: rgba(27,107,90,.1); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
+.sub-btn.active .bico { background: rgba(255,255,255,.2); }
+
+/* CONTENT AREA */
+.content-display { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg); min-width: 0; }
+.welcome { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; opacity: .7; padding: 20px; }
+.welcome-ico { font-size: 54px; }
+.welcome h3  { font-size: 18px; font-weight: 700; color: var(--primary-d); }
+.welcome p   { font-size: 13px; color: var(--muted); max-width: 300px; line-height: 1.9; }
+.panel { display: none; flex-direction: column; flex: 1; overflow: hidden; padding: 12px; gap: 10px; }
+.panel.visible { display: flex; }
+
+/* BREADCRUMB */
+.bc { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); font-weight: 600; flex-shrink: 0; }
+.bc .sep { color: #cbd5e1; }
+.bc .cur { color: var(--primary); }
+
+/* PANEL HEADER */
+.panel-hdr { background: linear-gradient(135deg, var(--primary-d), var(--teal)); border-radius: 11px; padding: 12px 16px; color: #fff; display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.panel-hdr-ico { font-size: 24px; width: 44px; height: 44px; background: rgba(255,255,255,.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.panel-hdr h2 { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+.panel-hdr p  { font-size: 11px; opacity: .8; }
+
+/* SPLIT GRID */
+.split { display: grid; flex: 1; min-height: 0; gap: 10px; grid-template-columns: 1fr 1fr; }
+
+/* CARD */
+.card { background: var(--white); border-radius: 13px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); border: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; }
+.card-hdr { display: flex; align-items: center; gap: 3px; padding: 3px 14px; border-bottom: 1px solid #f1f5f9; font-size: 12px; font-weight: 700; color: var(--primary); flex-shrink: 0; }
+.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); }
+.dot.red  { background: #ef4444; }
+.dot.gold { background: #f59e0b; }
+.card-body { padding: 3px; flex: 1; overflow-y: auto; font-size: 14px; line-height: 1.9; color: var(--text); font-weight: 800; }
+.card-body h4 { color: var(--primary); margin: 1px 0 5px; font-size: 13px; }
+.card-body p  { margin-bottom: 1px; }
+.obj-item { display: flex; align-items: flex-start; gap: 3px; padding: 2px 0; border-bottom: 1px dashed #f0f4f4; }
+.obj-item:last-child { border: none; }
+.obj-n { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+
+/* تعليمات النشاط — مضغوطة لتقليل الـ scroll */
+.card-body.compact { padding: 3px 12px; font-size: 12px; line-height: 1.6; }
+.card-body.compact h4 { margin: 5px 0 3px; font-size: 12px; }
+.card-body.compact p  { margin-bottom: 4px; }
+.card-body.compact .obj-item { padding: 4px 0; gap: 7px; }
+.card-body.compact .obj-n { width: 20px; height: 20px; font-size: 10px; margin-top: 1px; }
+
+/* ══ SUPPORT CARD ══ */
+.sup-card { background: #f0fdf9; border: 2px solid #a7f3d0; border-radius: 13px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 2px 12px rgba(27,107,90,.1); min-height: 0; }
+.sup-card-hdr { background: linear-gradient(135deg, var(--primary), var(--accent)); padding: 10px 14px; display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+.sup-card-ico { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sup-card-hdr-txt strong { color: #fff; font-size: 12px; font-weight: 800; display: block; }
+.sup-card-hdr-txt span   { color: rgba(255,255,255,.8); font-size: 10px; }
+.sup-list { flex: 1; overflow: hidden; padding: 10px; display: flex; flex-direction: column; gap: 6px; position: relative; }
+
+/* كل جملة دعم */
+.sup-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  background: var(--white); border: 1px solid #d1fae5; border-radius: 9px;
+  padding: 8px 10px; font-size: 12.5px; line-height: 1.7; color: var(--text);
+  box-shadow: 0 1px 4px rgba(27,107,90,.07); flex-shrink: 0;
+  /* animation الدخول */
+  opacity: 0; transform: translateY(10px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.sup-item.visible { opacity: 1; transform: translateY(0); }
+/* تلاشي بالعمر */
+.sup-item.old-1 { opacity: .55; }
+.sup-item.old-2 { opacity: .28; }
+.sup-item.old-3 { opacity: 0; pointer-events: none; }
+
+.sup-num { min-width: 20px; height: 20px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+
+/* ══ أزرار فتح/إغلاق الدعم ══ */
+.sup-open-btn {
+  background: rgba(255,255,255,.22); border: 2px solid rgba(255,255,255,.55);
+  color: #fff; font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 5px 16px; border-radius: 20px; cursor: pointer; white-space: nowrap;
+  transition: background .2s, transform .15s; flex-shrink: 0;
+}
+.sup-open-btn:hover { background: rgba(255,255,255,.38); transform: scale(1.04); }
+.sup-close-btn {
+  background: rgba(255,255,255,.12); border: 1.5px solid rgba(255,255,255,.38);
+  color: #fff; font-family: 'Cairo', sans-serif; font-size: 11px; font-weight: 700;
+  padding: 4px 11px; border-radius: 20px; cursor: pointer; white-space: nowrap;
+  flex-shrink: 0; transition: background .2s;
+}
+.sup-close-btn:hover { background: rgba(255,255,255,.28); }
+
+/* ══ CONTENT SECTION — right col ══ */
+.con-right { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+
+/* شريط الدعم فوق الفيديو */
+.sup-strip { background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 11px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-height: 54px; }
+.sup-strip-ico { font-size: 18px; flex-shrink: 0; }
+.sup-strip-msg { flex: 1; color: #fff; font-size: 12.5px; line-height: 1.6; transition: opacity .4s ease, transform .35s ease; }
+
+/* VIDEO */
+.video-card { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+.video-body { flex: 1; background: #0d1117; display: flex; flex-direction: column; min-height: 0; }
+.video-body iframe { width: 100%; height: 100%; border: none; flex: 1; min-height: 80px; }
+.video-ph { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #fff; min-height: 120px; background: linear-gradient(135deg, #1b4a4a, #0f766e, #1b4a4a); }
+.play-btn { width: 52px; height: 52px; border-radius: 50%; background: rgba(255,255,255,.15); border: 3px solid rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.vid-lbl  { font-size: 12px; font-weight: 600; opacity: .85; }
+.vid-hint { font-size: 10px; opacity: .5; }
+
+/* NOTE BAR — hidden */
+.note-bar { display: none; }
+
+/* ══ VIDEO NAVIGATION ══ */
+.video-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0d1117;
+  padding: 6px 10px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+.vid-nav-btn {
+  background: rgba(255,255,255,.12);
+  border: 1.5px solid rgba(255,255,255,.22);
+  color: #fff;
+  font-family: 'Cairo', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background .2s;
+  flex-shrink: 0;
+}
+.vid-nav-btn:hover:not(:disabled) { background: rgba(255,255,255,.25); }
+.vid-nav-btn:disabled { opacity: .35; cursor: not-allowed; }
+.vid-nav-counter {
+  color: rgba(255,255,255,.75);
+  font-size: 11.5px;
+  font-weight: 700;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vid-dots {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+.vid-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.vid-dot.active { background: #2dd4bf; transform: scale(1.3); }
+
+/* SCROLLBARS */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #a7f3d0; border-radius: 10px; }
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  :root { --sidebar-w: 200px; }
+  .split { grid-template-columns: 1fr; }
+  .con-right { flex-direction: row; }
+}
+@media (max-width: 600px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .support-badge { display: none; }
+  .header-title { max-width: 100%; font-size: 13px; }
+  .con-right { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="support-badge">✨ الدعم عند الطلب</div>
+  <div class="header-title">بيئة التعلم المدمج لتنمية مهارات إنتاج الدروس التفاعلية لدى طلاب كلية التربية النوعية</div>
+</div>
+
+<div class="nav">
+  <a href="home.html" target="_self">🏠 الرئيسية</a>
+  <a href="aims.html" target="_self">🎯 أهداف البيئة</a>
+  <a href="guied.html" target="_self">📚 دليل التعلم</a>
+  <a href="pretest.html" target="_self">📝 التقويم</a>
+  <a href="mods.html" class="active" target="_self">📖 المحتوى التعليمي</a>
+  <a href="poster.html" target="_self">📢 لوحة الإعلانات</a>
+  <a href="contact.html" target="_self">📞 اتصل بنا</a>
+</div>
+
+<div class="main">
+  <aside class="sidebar">
+    <div class="module-title">
+      📚 الموديول الثالث
+      <small>مهارات إنتاج الدروس التفاعلية</small>
+    </div>
+    <div class="lessons-list" id="lessonsList"></div>
+  </aside>
+
+  <div class="content-display">
+    <div class="welcome" id="welcome">
+      <div class="welcome-ico">📖</div>
+      <h3>مرحباً بك في المحتوى التعليمي</h3>
+      <p>اختر درساً من القائمة ثم اضغط على القسم المطلوب لتظهر المادة العلمية.</p>
+    </div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+/* ── meta ── */
+const SEC_META = {
+  objectives: { label: "أهداف الدرس",     icon: "🎯" },
+  content:    { label: "محتوى الدرس",     icon: "📄" },
+  activity:   { label: "النشاط التعليمي", icon: "🧩" }
+};
+
+function parseContent(raw) {
+  if (!raw) return '';
+  return raw
+    .replace(/<obj\s+n="([^"]+)">([\s\S]*?)<\/obj>/g,
+      (_, n, t) => `<div class="obj-item"><div class="obj-n">${n}</div><div>${t.trim()}</div></div>`)
+    .trim();
+}
+
+function getSec(lid, sk) {
+  const r = LESSONS_DATA[lid].sections[sk];
+  if (typeof r === 'string') return { content: r, videoSrc:'', videoType:'none', note:'', support:[] };
+  return { videoSrc:'', videoType:'none', note:'', support:[], ...r };
+}
+
+/* ── sidebar ── */
+Object.keys(LESSONS_DATA).forEach(id => {
+  const g = document.createElement('div');
+  g.className = 'lesson-group';
+  g.innerHTML = `
+    <div class="lesson-header" id="lh-${id}" onclick="toggleLesson('${id}')">
+      <div class="lesson-icon">${id}</div>
+      <div class="lesson-title">الدرس ${id}: ${LESSONS_DATA[id].title}</div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="lesson-sub" id="ls-${id}">
+      ${Object.keys(SEC_META).map(sk=>`
+        <button class="sub-btn" onclick="showContent('${id}','${sk}',this)">
+          <span class="bico">${SEC_META[sk].icon}</span>${SEC_META[sk].label}
+        </button>`).join('')}
+    </div>`;
+  document.getElementById('lessonsList').appendChild(g);
+});
+
+function toggleLesson(id) {
+  document.querySelectorAll('.lesson-sub').forEach(el => {
+    const open = el.id === `ls-${id}` && el.style.display !== 'flex';
+    el.style.display = open ? 'flex' : 'none';
+    document.getElementById(`lh-${el.id.slice(3)}`).classList.toggle('open', open);
+  });
+}
+
+/* ══════════════════════════════════════
+   SUPPORT ENGINE — بسيط ومضمون
+   كل N ثانية تنزل جملة جديدة للأسفل،
+   القديمة تتلاشى تدريجياً
+══════════════════════════════════════ */
+let supTimer   = null;
+let supItems   = [];   /* كل العناصر المضافة */
+let supIdx     = 0;    /* الجملة القادمة */
+let supMsgs    = [];   /* مصفوفة الجمل الحالية */
+let currentSupMessages = []; /* الجمل الخاصة بالقسم الحالي */
+const INTERVAL = 3500; /* ms بين كل جملة */
+const MAX_SHOW = 4;    /* أقصى عدد مرئي قبل الإزالة */
+
+function stopSupport() {
+  clearInterval(supTimer);
+  supTimer = null;
+  supItems = [];
+  supIdx   = 0;
+  supMsgs  = [];
+  currentSupMessages = [];
+}
+
+/* ── فتح/إغلاق الدعم في الشريط (محتوى) ── */
+function openStripSupport() {
+  document.getElementById('supStripClosed').style.display = 'none';
+  document.getElementById('supStripOpen').style.display   = 'flex';
+  startStripSupport(currentSupMessages);
+}
+function closeStripSupport() {
+  clearInterval(supTimer);
+  supTimer = null;
+  supIdx   = 0;
+  document.getElementById('supStripOpen').style.display   = 'none';
+  document.getElementById('supStripClosed').style.display = 'flex';
+}
+
+/* ── فتح/إغلاق بطاقة الدعم (نشاط) ── */
+function openCardSupport() {
+  const list = document.getElementById('supList');
+  const openBtn  = document.getElementById('supCardOpenBtn');
+  const closeBtn = document.getElementById('supCardCloseBtn');
+  const subtitle = document.getElementById('supCardSubtitle');
+  if (list)  list.style.display  = 'flex';
+  if (openBtn)  openBtn.style.display  = 'none';
+  if (closeBtn) closeBtn.style.display = 'inline-flex';
+  if (subtitle) subtitle.textContent   = 'توجيهات وإرشادات مستمرة';
+  /* امسح أي items قديمة */
+  supItems = [];
+  supIdx   = 0;
+  if (list) list.innerHTML = '';
+  startCardSupport(currentSupMessages);
+}
+function closeCardSupport() {
+  clearInterval(supTimer);
+  supTimer = null;
+  supItems = [];
+  supIdx   = 0;
+  const list = document.getElementById('supList');
+  const openBtn  = document.getElementById('supCardOpenBtn');
+  const closeBtn = document.getElementById('supCardCloseBtn');
+  const subtitle = document.getElementById('supCardSubtitle');
+  if (list)  { list.innerHTML = ''; list.style.display = 'none'; }
+  if (openBtn)  openBtn.style.display  = 'inline-flex';
+  if (closeBtn) closeBtn.style.display = 'none';
+  if (subtitle) subtitle.textContent   = 'اضغط لبدء التوجيهات';
+}
+
+/* ── وضع الكارت (نشاط) ── */
+function startCardSupport(messages) {
+  const container = document.getElementById('supList');
+  if (!container || !messages.length) return;
+  supMsgs = messages;
+  supIdx  = 0;
+
+  const add = () => {
+    /* أنشئ العنصر وأضفه للأسفل */
+    const div = document.createElement('div');
+    div.className = 'sup-item';
+    div.innerHTML = `<div class="sup-num">${supIdx + 1}</div><span>${supMsgs[supIdx]}</span>`;
+    container.appendChild(div);
+    supItems.push(div);
+
+    /* شغّل الـ animation بعد frame */
+    requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('visible')));
+
+    /* حدّث شفافية كل العناصر */
+    supItems.forEach((el, i) => {
+      const age = supItems.length - 1 - i; /* 0 = الأحدث */
+      el.classList.remove('old-1','old-2','old-3');
+      if (age === 1) el.classList.add('old-1');
+      else if (age === 2) el.classList.add('old-2');
+      else if (age >= 3) { el.classList.add('old-3'); }
+    });
+
+    /* احذف العناصر التي تجاوزت الحد بعد fade */
+    if (supItems.length > MAX_SHOW) {
+      const gone = supItems.shift();
+      setTimeout(() => gone.remove(), 500);
+    }
+
+    supIdx = (supIdx + 1) % supMsgs.length;
+  };
+
+  add(); /* أول جملة فوراً */
+  supTimer = setInterval(add, INTERVAL);
+}
+
+/* ── وضع الشريط (محتوى) ── */
+function startStripSupport(messages) {
+  const el = document.getElementById('supStripMsg');
+  if (!el || !messages.length) return;
+  supMsgs = messages;
+  supIdx  = 0;
+
+  const show = () => {
+    el.style.opacity   = '0';
+    el.style.transform = 'translateY(6px)';
+    setTimeout(() => {
+      el.textContent     = supMsgs[supIdx];
+      el.style.opacity   = '1';
+      el.style.transform = 'translateY(0)';
+      supIdx = (supIdx + 1) % supMsgs.length;
+    }, 380);
+  };
+
+  el.textContent     = supMsgs[0];
+  el.style.opacity   = '1';
+  el.style.transform = 'translateY(0)';
+  supIdx = 1;
+  supTimer = setInterval(show, INTERVAL);
+}
+
+/* ── helpers ── */
+function makeTextCard(sec) {
+  return `<div class="card">
+    <div class="card-hdr"><div class="dot"></div> المادة العلمية</div>
+    <div class="card-body">${parseContent(sec.content)}</div>
+  </div>`;
+}
+
+function makeVideoHTML(sec, meta, lid) {
+  if (sec.videoType === 'youtube' && sec.videoSrc)
+    return `<iframe src="https://www.youtube.com/embed/${sec.videoSrc}?rel=0&modestbranding=1" allowfullscreen></iframe>`;
+  if (sec.videoType === 'local' && sec.videoSrc)
+    return `<video controls style="width:100%;height:100%;background:#000"><source src="${sec.videoSrc}"></video>`;
+  return `<div class="video-ph">
+    <div class="play-btn">▶</div>
+    <div class="vid-lbl">${meta.label} — الدرس ${lid}</div>
+    <div class="vid-hint">أضف رابط الفيديو في data.js</div>
+  </div>`;
+}
+
+/* ── عارض الفيديو المفرد (فيديو واحد بدون أزرار) ── */
+function makeSingleVideoCard(sec, meta, lid) {
+  return `
+    <div class="card video-card">
+      <div class="card-hdr"><div class="dot red"></div> الفيديو التعليمي</div>
+      <div class="video-body" id="videoBody">${makeVideoHTML(sec, meta, lid)}</div>
+    </div>`;
+}
+
+/* ── عارض الفيديوهات المتعددة مع أزرار التنقل ── */
+let vidIndex = 0;
+let vidList  = [];
+
+function makeMultiVideoCard(videos) {
+  vidIndex = 0;
+  vidList  = videos;
+  const dots = videos.map((_, i) =>
+    `<span class="vid-dot ${i===0?'active':''}" onclick="goToVideo(${i})"></span>`
+  ).join('');
+
+  return `
+    <div class="card video-card" style="display:flex;flex-direction:column;">
+      <div class="card-hdr"><div class="dot red"></div> الفيديوهات التعليمية (${videos.length} فيديوهات)</div>
+      <div class="video-body" id="videoBody" style="flex:1;min-height:0;">${renderVideoItem(videos[0])}</div>
+      <div class="video-nav">
+        <button class="vid-nav-btn" id="vidPrev" onclick="changeVideo(-1)" disabled>◀ السابق</button>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;">
+          <div class="vid-nav-counter" id="vidCounter">${videos[0].title}</div>
+          <div class="vid-dots" id="vidDots">${dots}</div>
+        </div>
+        <button class="vid-nav-btn" id="vidNext" onclick="changeVideo(1)">التالي ▶</button>
+      </div>
+    </div>`;
+}
+
+function renderVideoItem(v) {
+  if (v.videoType === 'youtube' && v.videoSrc) {
+    const id = v.videoSrc.includes('youtu.be/')
+      ? v.videoSrc.split('youtu.be/')[1].split('?')[0]
+      : v.videoSrc;
+    return `<iframe src="https://www.youtube.com/embed/${id}?rel=0&modestbranding=1" allowfullscreen style="width:100%;height:100%;border:none;flex:1;min-height:80px;"></iframe>`;
+  }
+  if (v.videoType === 'local' && v.videoSrc)
+    return `<video controls style="width:100%;height:100%;background:#000"><source src="${v.videoSrc}"></video>`;
+  return `<div class="video-ph">
+    <div class="play-btn">▶</div>
+    <div class="vid-lbl">${v.title}</div>
+    <div class="vid-hint">أضف رابط الفيديو في data.js</div>
+  </div>`;
+}
+
+function goToVideo(idx) {
+  vidIndex = idx;
+  document.getElementById('videoBody').innerHTML = renderVideoItem(vidList[idx]);
+  document.getElementById('vidCounter').textContent = vidList[idx].title;
+  document.getElementById('vidPrev').disabled = idx === 0;
+  document.getElementById('vidNext').disabled = idx === vidList.length - 1;
+  document.querySelectorAll('.vid-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+
+function changeVideo(dir) {
+  const next = vidIndex + dir;
+  if (next < 0 || next >= vidList.length) return;
+  goToVideo(next);
+}
+
+/* ══ الدالة الرئيسية ══ */
+let activeBtn = null;
+
+function showContent(lid, sk, btn) {
+  stopSupport();
+
+  const lesson = LESSONS_DATA[lid];
+  const sec    = getSec(lid, sk);
+  const meta   = SEC_META[sk];
+  const panel  = document.getElementById('panel');
+
+  document.getElementById('welcome').style.display = 'none';
+  panel.className = 'panel visible';
+
+  const bc = `<div class="bc"><span>الموديول الأول</span><span class="sep">›</span><span>الدرس ${lid}</span><span class="sep">›</span><span class="cur">${meta.label}</span></div>`;
+  const hdr = `<div class="panel-hdr"><div class="panel-hdr-ico">${meta.icon}</div><div><h2>${meta.label} — الدرس ${lid}</h2><p>${lesson.title}</p></div></div>`;
+  const noteBar = sec.note ? `<div class="note-bar"><span class="note-ico">💡</span><span>${sec.note}</span></div>` : '';
+
+  /* ── أهداف: نص فقط بدون دعم ── */
+  if (sk === 'objectives') {
+    panel.innerHTML = bc + hdr + `
+      <div class="card" style="flex:1;min-height:0;">
+        <div class="card-hdr"><div class="dot"></div> أهداف الدرس</div>
+        <div class="card-body">${parseContent(sec.content)}</div>
+      </div>` + noteBar;
+  }
+
+  /* ── محتوى: نص + شريط دعم + فيديو ── */
+  else if (sk === 'content') {
+    // اختر عارض الفيديو المناسب
+    const hasMultiVideos = sec.videos && sec.videos.length > 1;
+    const videoCardHTML  = hasMultiVideos
+      ? makeMultiVideoCard(sec.videos)
+      : makeSingleVideoCard(sec, meta, lid);
+
+    currentSupMessages = sec.support || [];
+    panel.innerHTML = bc + hdr + `
+      <div class="split" style="flex:1;min-height:0;">
+        ${makeTextCard(sec)}
+        <div class="con-right">
+          <div class="sup-strip" id="supStripWrap">
+            <!-- الحالة المغلقة: زر عرض الدعم -->
+            <div id="supStripClosed" style="display:flex;align-items:center;gap:10px;width:100%;">
+              <div class="sup-strip-ico">💡</div>
+              <span style="flex:1;color:rgba(255,255,255,.88);font-size:12.5px;">هل تحتاج مساعدة في فهم المحتوى؟</span>
+              <button class="sup-open-btn" onclick="openStripSupport()">▶ عرض الدعم</button>
+            </div>
+            <!-- الحالة المفتوحة: رسالة الدعم + زر إغلاق -->
+            <div id="supStripOpen" style="display:none;align-items:center;gap:10px;width:100%;">
+              <div class="sup-strip-ico">💡</div>
+              <div class="sup-strip-msg" id="supStripMsg" style="flex:1;"></div>
+              <button class="sup-close-btn" onclick="closeStripSupport()">✕ إخفاء</button>
+            </div>
+          </div>
+          ${videoCardHTML}
+        </div>
+      </div>` + noteBar;
+  }
+
+  /* ── نشاط: عمودان — أيمن: تعليمات + إجابة + زر وسط | أيسر: دعم كامل الارتفاع ── */
+  else if (sk === 'activity') {
+    currentSupMessages = sec.support || [];
+    panel.innerHTML = bc + hdr + `
+      <div class="split" style="flex:1;min-height:0;">
+
+        <!-- ══ العمود الأيمن: تعليمات + مساحة الإجابة ══ -->
+        <div style="display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden;">
+
+          <!-- تعليمات النشاط -->
+          <div class="card" style="flex-shrink:0;max-height:42%;min-height:0;">
+            <div class="card-hdr"><div class="dot gold"></div> تعليمات النشاط</div>
+            <div class="card-body compact" style="overflow-y:auto;">${parseContent(sec.content)}</div>
+          </div>
+
+          <!-- مساحة الإجابة + زر التسليم في المنتصف -->
+          <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative;">
+            <div class="card-hdr"><div class="dot" style="background:#7c3aed;"></div> إجابة الطالب</div>
+            <!-- textarea يملأ كل المساحة -->
+            <textarea id="activityAnswer" placeholder="اكتب إجابتك هنا..."
+              style="flex:1;width:100%;resize:none;border:none;border-top:1px solid #f1f5f9;padding:46px 14px;font-family:'Cairo',sans-serif;font-size:13px;line-height:1.9;color:#1f2937;outline:none;background:transparent;min-height:0;"
+              onfocus="this.style.background='#fafffe'" onblur="this.style.background='transparent'"></textarea>
+            <!-- زر التسليم عائم في وسط مساحة الإجابة -->
+            <button onclick="submitToWhatsApp('${lid}','${lesson.title}')"
+              style="position:absolute;bottom:50%;left:50%;transform:translate(-50%,50%);
+                     background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;
+                     border-radius:50px;padding:10px 22px;font-family:'Cairo',sans-serif;
+                     font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;
+                     justify-content:center;gap:7px;white-space:nowrap;
+                     box-shadow:0 4px 16px rgba(37,211,102,.45);
+                     transition:transform .2s,box-shadow .2s;z-index:10;"
+              onmouseover="this.style.boxShadow='0 6px 20px rgba(37,211,102,.6)';this.style.transform='translate(-50%,50%) translateY(-2px)'"
+              onmouseout="this.style.boxShadow='0 4px 16px rgba(37,211,102,.45)';this.style.transform='translate(-50%,50%)'">
+              <span style="font-size:17px;">💬</span> تسليم النشاط عبر واتساب
+            </button>
+          </div>
+
+        </div>
+
+        <!-- ══ العمود الأيسر: بطاقة الدعم مع زر الفتح/الغلق ══ -->
+        <div class="sup-card" style="min-height:0;display:flex;flex-direction:column;">
+          <div class="sup-card-hdr" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:9px;">
+              <div class="sup-card-ico">🤝</div>
+              <div class="sup-card-hdr-txt">
+                <strong>الدعم</strong>
+                <span id="supCardSubtitle">اضغط لبدء التوجيهات</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:6px;align-items:center;">
+              <button id="supCardOpenBtn" class="sup-open-btn" onclick="openCardSupport()" style="font-size:11px;padding:5px 13px;">▶ ابدأ الدعم</button>
+              <button id="supCardCloseBtn" class="sup-close-btn" onclick="closeCardSupport()" style="display:none;">✕ إغلاق</button>
+            </div>
+          </div>
+          <div class="sup-list" id="supList" style="flex:1;overflow:hidden;display:none;"></div>
+        </div>
+
+      </div>`;
+  } /* ← نهاية else if activity */
+
+  if (activeBtn) activeBtn.classList.remove('active');
+  btn.classList.add('active');
+  activeBtn = btn;
+}
+
+/* ── تسليم النشاط عبر واتساب ── */
+function submitToWhatsApp(lid, lessonTitle) {
+  const answer = (document.getElementById('activityAnswer') || {}).value || '';
+  if (!answer.trim()) {
+    alert('⚠️ الرجاء كتابة إجابتك قبل التسليم.');
+    return;
+  }
+  const msg = `📚 *تسليم نشاط*\n*الدرس ${lid}:* ${lessonTitle}\n\n*الإجابة:*\n${answer.trim()}`;
+  /* ← ضع رقم الواتساب هنا مع كود الدولة بدون + مثال: 201001234567 */
+  const phone = '201001234567';
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+</script>
+</body>
+</html>

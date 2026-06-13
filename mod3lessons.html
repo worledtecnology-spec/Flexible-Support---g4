@@ -243,7 +243,6 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden; b
   <a href="home.html" target="_self">🏠 الرئيسية</a>
   <a href="aims.html" target="_self">🎯 أهداف البيئة</a>
   <a href="guied.html" target="_self">📚 دليل التعلم</a>
-  <a href="pretest.html" target="_self">📝 التقويم</a>
   <a href="mods.html" class="active" target="_self">📖 المحتوى التعليمي</a>
   <a href="poster.html" target="_self">📢 لوحة الإعلانات</a>
   <a href="contact.html" target="_self">📞 اتصل بنا</a>
@@ -453,8 +452,17 @@ function startStripSupport(messages) {
 /* ── helpers ── */
 function makeTextCard(sec) {
   return `<div class="card">
-    <div class="card-hdr"><div class="dot"></div> المادة العلمية</div>
-    <div class="card-body">${parseContent(sec.content)}</div>
+    <div class="card-hdr"><div class="dot"></div> صورة المحتوى</div>
+    <div style="flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#f8fafc;">
+      ${sec.imageSrc
+        ? `<img src="${sec.imageSrc}" alt="محتوى الدرس"
+            style="max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.1);" />`
+        : `<div style="text-align:center;color:#94a3b8;font-size:13px;">
+            <div style="font-size:40px;margin-bottom:8px;">🖼️</div>
+            أضف رابط الصورة في data.js
+          </div>`
+      }
+    </div>
   </div>`;
 }
 

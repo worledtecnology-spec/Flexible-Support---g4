@@ -216,7 +216,6 @@ body { display: flex; flex-direction: column; height: 100vh; }
     <a href="home.html" target="_self">🏠 الرئيسية</a>
     <a href="aims.html" target="_self">🎯 أهداف البيئة</a>
     <a href="guied.html" target="_self">📚 دليل التعلم</a>
-    <a href="pretest.html" target="_self">📝 التقويم</a>
     <a href="mods.html" target="_self">📖 المحتوى التعليمي</a>
     <a href="poster.html" class="active" target="_self">📢 لوحة الإعلانات</a>
     <a href="contact.html" target="_self">📞 اتصل بنا</a>
@@ -234,32 +233,18 @@ body { display: flex; flex-direction: column; height: 100vh; }
             <button class="filter-btn active" onclick="filterAnn('all', this)">
                 <span class="filter-icon">📋</span>
                 <span>جميع الإعلانات</span>
-                <span class="filter-count" id="count-all">٧</span>
+                <span class="filter-count" id="count-all"></span>
             </button>
             <button class="filter-btn" onclick="filterAnn('urgent', this)">
                 <span class="filter-icon">🔴</span>
                 <span>عاجل ومهم</span>
-                <span class="filter-count" id="count-urgent">٢</span>
+                <span class="filter-count" id="count-urgent"></span>
             </button>
             <button class="filter-btn" onclick="filterAnn('info', this)">
                 <span class="filter-icon">🔵</span>
                 <span>إعلان وتوجيه</span>
-                <span class="filter-count" id="count-info">٢</span>
+                <span class="filter-count" id="count-info"></span>
             </button>
-        </div>
-        <div class="stats-box">
-            <div class="stat-item">
-                <span class="stat-label">إجمالي الإعلانات</span>
-                <span class="stat-value">٧</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">آخر تحديث</span>
-                <span class="stat-value">اليوم</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-label">إعلانات عاجلة</span>
-                <span class="stat-value">٢</span>
-            </div>
         </div>
     </div>
 
@@ -268,7 +253,7 @@ body { display: flex; flex-direction: column; height: 100vh; }
         <div class="board-header">
             <div class="board-title">
                 <h2>📢 لوحة الإعلانات</h2>
-                <span class="bcount" id="shownCount">٧ إعلان</span>
+                <span class="bcount" id="shownCount"> </span>
             </div>
             <div class="board-search">
                 <input type="text" placeholder="ابحث في الإعلانات..." id="searchInput" oninput="searchAnn()" />
@@ -281,7 +266,7 @@ body { display: flex; flex-direction: column; height: 100vh; }
             <!-- ١ URGENT -->
             <div class="ann-card urgent" data-type="urgent">
                 <div class="ann-head">
-                    <div class="ann-num">١</div>
+                    <div class="ann-num"></div>
                     <div class="ann-meta">
                         <div class="ann-title">تعليمات الدخول للبيئة وكلمات المرور</div>
                         <div class="ann-date">📅 بداية الفصل الدراسي</div>
@@ -307,7 +292,7 @@ body { display: flex; flex-direction: column; height: 100vh; }
             <!-- ٢ INFO -->
             <div class="ann-card info" data-type="info">
                 <div class="ann-head">
-                    <div class="ann-num">٢</div>
+                    <div class="ann-num"></div>
                     <div class="ann-meta">
                         <div class="ann-title">تعليمات البدء في الموديول الثالث</div>
                         <div class="ann-date">📅 الأسبوع الأول</div>
@@ -331,36 +316,12 @@ body { display: flex; flex-direction: column; height: 100vh; }
                 </div>
             </div>
 
-            <!-- ٤ INFO -->
-            <div class="ann-card info" data-type="info">
-                <div class="ann-head">
-                    <div class="ann-num">٤</div>
-                    <div class="ann-meta">
-                        <div class="ann-title">إرشادات استخدام الدعم الثابت في الدروس</div>
-                        <div class="ann-date">📅 مستمر طوال الفصل</div>
-                    </div>
-                    <span class="ann-badge badge-info">🔵 توجيه</span>
-                </div>
-                <div class="ann-body">
-                    <div class="ann-text">
-                        البيئة تعمل بنظام <strong>نمط الدعم الثابت</strong>، وهو يعني وجود نصوص دعم ثابتة في كل درس تظهر تباعاً في العمود الجانبي. هذه النصوص مُصممة لمساعدتك أثناء دراسة المحتوى — <span class="highlight">لا تتجاهلها</span>، فهي تلميحات عملية وتذكيرات مهمة.
-                    </div>
-                    <button class="ann-expand-btn" onclick="toggleMore(this)">📌 تفاصيل إضافية ▼</button>
-                    <div class="ann-more">
-                        <div class="ann-more-list">
-                            <div class="aml-item"><span class="aml-icon">📖</span> نصوص الدعم تتناوب تلقائياً كل بضع ثوانٍ أثناء الدراسة</div>
-                            <div class="aml-item"><span class="aml-icon">💡</span> تحتوي على تلميحات عملية وتذكيرات بالمفاهيم الأساسية</div>
-                            <div class="aml-item"><span class="aml-icon">🔍</span> تابعها بعناية لأنها تُعين على فهم المحتوى بعمق أكبر</div>
-                            <div class="aml-item"><span class="aml-icon">🎯</span> تختلف نصوص الدعم من درس لآخر وهي مخصصة لكل محتوى</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
 
             <!-- ٥ URGENT -->
             <div class="ann-card urgent" data-type="urgent">
                 <div class="ann-head">
-                    <div class="ann-num">٥</div>
+                    <div class="ann-num"></div>
                     <div class="ann-meta">
                         <div class="ann-title">تنبيه هام: موعد الاختبار التحصيلي الشامل</div>
                         <div class="ann-date">📅 نهاية الفصل الدراسي</div>

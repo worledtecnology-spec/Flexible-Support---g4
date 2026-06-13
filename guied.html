@@ -90,6 +90,8 @@ body{display:flex;flex-direction:column;}
 .bg{background:#d1fae5;color:#065f46;}.bb{background:#dbeafe;color:#1e40af;}.ba{background:#fef3c7;color:#92400e;}
 .cta{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--pr),var(--ac));color:#fff;text-decoration:none;padding:9px 22px;border-radius:50px;font-size:12px;font-weight:900;font-family:'Cairo',sans-serif;box-shadow:0 4px 14px rgba(10,133,69,.35);transition:all .25s;}
 .cta:hover{transform:translateY(-2px);}
+.panel-img{width:100%;height:auto;max-height:75%;object-fit:contain;object-position:top;display:block;border-radius:8px;}
+.pbody{overflow:hidden !important;align-items:flex-start;}
 </style>
 </head>
 <body>
@@ -120,23 +122,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel active" id="p1">
 <div class="pbar"><div class="pic">🌟</div><div><h2>مرحباً بك في بيئة التعلم المدمج</h2><p>تعرّف على البيئة قبل البدء</p></div><div class="pbdg">١ من ٨</div></div>
 <div class="pbody">
-    <div class="hbox"><div class="hbt">🎓 ما هذه البيئة؟</div><p>بيئة تعلم مدمج لتنمية مهاراتك في <strong>إنتاج الدروس التفاعلية</strong> باستخدام CourseLab، تجمع بين التعلم الإلكتروني والمحتوى التفاعلي لتجربة تعليمية متكاملة.</p></div>
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">🏗️</span><span class="cht">مكونات البيئة</span></div><div class="cb">
-            <div class="li"><span class="lic">📖</span><div class="lt"><strong>المحتوى:</strong> موديولات ودروس منظمة تدريجياً</div></div>
-            <div class="li"><span class="lic">🎯</span><div class="lt"><strong>الأهداف:</strong> أهداف سلوكية لكل درس</div></div>
-            <div class="li"><span class="lic">📝</span><div class="lt"><strong>التقويم:</strong> اختبارات تحصيلية شاملة</div></div>
-            <div class="li"><span class="lic">📢</span><div class="lt"><strong>الإعلانات:</strong> توجيهات ومستجدات</div></div>
-            <div class="li"><span class="lic">📞</span><div class="lt"><strong>التواصل:</strong> صفحة التواصل مع المشرف</div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">📊</span><span class="cht">هيكل البيئة</span></div><div class="cb">
-            <div class="flow">
-                <div class="fs"><div class="fn">١</div><div><div class="ft">الموديول الأول والثاني</div><div class="fd">مرحلة التصميم التعليمي</div></div></div>
-                <div class="fs"><div class="fn">٢</div><div><div class="ft">الموديول الثالث</div><div class="fd">إنتاج الدروس بـ CourseLab</div></div></div>
-                <div class="fs"><div class="fn">٣</div><div><div class="ft">الموديول الرابع</div><div class="fd">النشر والتطبيق والتقويم</div></div></div>
-            </div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ١: مرحباً بك في البيئة ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/we.png" alt="مرحباً بك في البيئة" class="panel-img">
 </div>
 </div>
 
@@ -144,29 +132,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p2">
 <div class="pbar"><div class="pic">💻</div><div><h2>متطلبات التعلم والأدوات اللازمة</h2><p>تأكد من جاهزية بيئتك التقنية</p></div><div class="pbdg">٢ من ٨</div></div>
 <div class="pbody">
-    <div class="g3">
-        <div class="card"><div class="ch"><span class="chi">🖥️</span><span class="cht">متطلبات الجهاز</span></div><div class="cb">
-            <div class="li"><div class="ln">١</div><div class="lt">نظام <strong>Windows 7</strong>+</div></div>
-            <div class="li"><div class="ln">٢</div><div class="lt">ذاكرة <strong>RAM 2GB</strong>+</div></div>
-            <div class="li"><div class="ln">٣</div><div class="lt">مساحة <strong>2GB</strong> فارغة</div></div>
-            <div class="li"><div class="ln">٤</div><div class="lt">شاشة <strong>1024×768</strong>+</div></div>
-            <div class="li"><div class="ln">٥</div><div class="lt">إنترنت <strong>مستقر</strong></div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">🌐</span><span class="cht">متطلبات المتصفح</span></div><div class="cb">
-            <div class="li"><div class="ln">١</div><div class="lt"><strong>Chrome</strong> موصى به</div></div>
-            <div class="li"><div class="ln">٢</div><div class="lt"><strong>Firefox</strong> إصدار 3+</div></div>
-            <div class="li"><div class="ln">٣</div><div class="lt"><strong>Edge</strong> للتأثيرات</div></div>
-            <div class="li"><div class="ln">٤</div><div class="lt">تفعيل <strong>JavaScript</strong></div></div>
-            <div class="li"><div class="ln">٥</div><div class="lt">دعم <strong>XML والوسائط</strong></div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">🛠️</span><span class="cht">البرامج المطلوبة</span></div><div class="cb">
-            <div class="li"><div class="ln">١</div><div class="lt"><strong>CourseLab 2.7</strong></div></div>
-            <div class="li"><div class="ln">٢</div><div class="lt"><strong>Flash Player</strong></div></div>
-            <div class="li"><div class="ln">٣</div><div class="lt">محرر <strong>صور/وسائط</strong></div></div>
-            <div class="li"><div class="ln">٤</div><div class="lt"><strong>VLC</strong> للفيديو</div></div>
-            <div class="li"><div class="ln">٥</div><div class="lt"><strong>WinRAR</strong> للضغط</div></div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ٢: متطلبات التعلم ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/mota.png" alt="متطلبات التعلم والأدوات اللازمة" class="panel-img">
 </div>
 </div>
 
@@ -174,25 +142,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p3">
 <div class="pbar"><div class="pic">🗺️</div><div><h2>كيفية التنقل داخل البيئة</h2><p>أدوات التنقل والوصول للمحتوى</p></div><div class="pbdg">٣ من ٨</div></div>
 <div class="pbody">
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">🔗</span><span class="cht">شريط التنقل العلوي</span></div><div class="cb">
-            <div class="li"><span class="lic">🏠</span><div class="lt"><strong>الرئيسية:</strong> صفحة الترحيب</div></div>
-            <div class="li"><span class="lic">🎯</span><div class="lt"><strong>أهداف البيئة:</strong> الأهداف العامة</div></div>
-            <div class="li"><span class="lic">📚</span><div class="lt"><strong>دليل التعلم:</strong> الصفحة الحالية</div></div>
-            <div class="li"><span class="lic">📝</span><div class="lt"><strong>التقويم:</strong> الاختبار الشامل</div></div>
-            <div class="li"><span class="lic">📖</span><div class="lt"><strong>المحتوى:</strong> الموديولات والدروس</div></div>
-            <div class="li"><span class="lic">📢</span><div class="lt"><strong>الإعلانات:</strong> توجيهات المشرف</div></div>
-            <div class="li"><span class="lic">📞</span><div class="lt"><strong>اتصل بنا:</strong> بيانات التواصل</div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">📍</span><span class="cht">مسار الوصول للدروس</span></div><div class="cb">
-            <div class="flow">
-                <div class="fs"><div class="fn">١</div><div><div class="ft">اضغط "المحتوى التعليمي"</div><div class="fd">تظهر قائمة الموديولات</div></div></div>
-                <div class="fs"><div class="fn">٢</div><div><div class="ft">اختر الموديول وأدخل كلمة المرور</div><div class="fd">كلمة المرور من الأستاذ المشرف</div></div></div>
-                <div class="fs"><div class="fn">٣</div><div><div class="ft">اختر الدرس من الخريطة الدائرية</div><div class="fd">الدروس في شكل تفاعلي</div></div></div>
-                <div class="fs"><div class="fn">٤</div><div><div class="ft">أهداف ← محتوى ← نشاط</div><div class="fd">الترتيب الثلاثي داخل كل درس</div></div></div>
-            </div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ٣: التنقل داخل البيئة ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/go.png" alt="كيفية التنقل داخل البيئة" class="panel-img">
 </div>
 </div>
 
@@ -200,22 +152,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p4">
 <div class="pbar"><div class="pic">📋</div><div><h2>خطوات الدراسة المنهجية</h2><p>اتبع هذه الخطوات بدقة داخل كل درس</p></div><div class="pbdg">٤ من ٨</div></div>
 <div class="pbody">
-    <div class="card"><div class="ch"><span class="chi">🔢</span><span class="cht">الخطوات التفصيلية داخل كل درس</span></div><div class="cb">
-        <div class="g2" style="gap:5px">
-            <div>
-                <div class="li"><div class="ln">١</div><div class="lt">اقرأ <strong>أهداف الدرس</strong> قبل المحتوى — هي بوصلتك</div></div>
-                <div class="li"><div class="ln">٢</div><div class="lt">شاهد <strong>الفيديو التعليمي</strong> مع تدوين الملاحظات</div></div>
-                <div class="li"><div class="ln">٣</div><div class="lt">اقرأ <strong>المحتوى النصي</strong> ومرّ على العناوين أولاً</div></div>
-                <div class="li"><div class="ln">٤</div><div class="lt">طبّق <strong>النشاط التطبيقي</strong> فوراً على جهازك</div></div>
-            </div>
-            <div>
-                <div class="li"><div class="ln">٥</div><div class="lt">راجع <strong>نصوص الدعم الثابت</strong> الجانبية</div></div>
-                <div class="li"><div class="ln">٦</div><div class="lt">عد لـ<strong>الأهداف مرة أخرى</strong> وتأكد من تحقيقها</div></div>
-                <div class="li"><div class="ln">٧</div><div class="lt">انتقل للتالي بعد <strong>إتمام الدرس الحالي كاملاً</strong></div></div>
-                <div class="li"><div class="ln">٨</div><div class="lt">بعد كل موديول أجرِ <strong>مراجعة شاملة</strong></div></div>
-            </div>
-        </div>
-    </div></div>
+    <!-- ======= الصورة ٤: خطوات الدراسة المنهجية ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/steps.png" alt="خطوات الدراسة المنهجية" class="panel-img">
 </div>
 </div>
 
@@ -223,27 +162,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p5">
 <div class="pbar"><div class="pic">📖</div><div><h2>دليل الموديولات والمحتوى التعليمي</h2><p>نظرة تفصيلية على الموديولات</p></div><div class="pbdg">٥ من ٨</div></div>
 <div class="pbody">
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">🎨</span><span class="cht">الموديول الثالث — إنتاج الدروس</span></div><div class="cb">
-            <div class="li"><div class="ln">١</div><div class="lt">خلفية نظرية عن CourseLab وهيكل الدرس</div></div>
-            <div class="li"><div class="ln">٢</div><div class="lt">تحميل وتثبيت البرنامج وإنشاء درس</div></div>
-            <div class="li"><div class="ln">٣</div><div class="lt">تحرير الدرس: الشرائح والوحدات</div></div>
-            <div class="li"><div class="ln">٤</div><div class="lt">الكائنات الأساسية: نصوص، صور، فيديو</div></div>
-            <div class="li"><div class="ln">٥</div><div class="lt">الكائنات المركبة: بالونات، أزرار، شخصيات</div></div>
-            <div class="li"><div class="ln">٦</div><div class="lt">الأسئلة والاختبارات وإعداداتها</div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">🎬</span><span class="cht">الموديول الرابع — النشر والتقويم</span></div><div class="cb">
-            <div class="li"><div class="ln">١</div><div class="lt">نشر الدرس عبر الإنترنت وأقراص CD</div></div>
-            <div class="li"><div class="ln">٢</div><div class="lt">رفعه على LMS بمعايير SCORM</div></div>
-            <div class="li"><div class="ln">٣</div><div class="lt">تطبيق الدرس مع الطلاب وجمع البيانات</div></div>
-            <div class="li"><div class="ln">٤</div><div class="lt">التقويم التكويني والختامي</div></div>
-            <div class="li"><div class="ln">٥</div><div class="lt">التغذية الراجعة واستطلاعات الرأي</div></div>
-            <div class="li"><div class="ln">٦</div><div class="lt">التحسين المستمر بناءً على النتائج</div></div>
-        </div></div>
-    </div>
-    <div class="card"><div class="ch"><span class="chi"></span><span class="cht"> </span></div><div class="cb" style="padding:5px 7px">
-       
-    </div></div>
+    <!-- ======= الصورة ٥: الموديولات والمحتوى التعليمي ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/gu.png" alt="دليل الموديولات والمحتوى التعليمي" class="panel-img">
 </div>
 </div>
 
@@ -251,24 +172,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p6">
 <div class="pbar"><div class="pic">💡</div><div><h2>إرشادات وتوجيهات الدراسة</h2><p>نصائح لتحقيق أقصى استفادة</p></div><div class="pbdg">٦ من ٨</div></div>
 <div class="pbody">
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">✅</span><span class="cht">ما يجب عليك فعله</span></div><div class="cb">
-            <div class="li"><span class="lic">✅</span><div class="lt">التزم بالتسلسل المنطقي للدروس</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">طبّق كل نشاط فور الانتهاء منه</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">دوّن ملاحظاتك وأسئلتك أثناء الدراسة</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">استعرض نصوص الدعم الجانبي دائماً</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">احفظ عملك بـ Ctrl+S باستمرار</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">راجع لوحة الإعلانات في بداية كل جلسة</div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">❌</span><span class="cht">ما يجب تجنبه</span></div><div class="cb">
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تبدأ التقويم قبل إنهاء الموديولات</div></div>
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تغلق البرنامج أثناء حفظ الملفات</div></div>
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تستخدم أسماء عربية في الملفات</div></div>
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تتجاهل نشاط الدرس أبداً</div></div>
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تتجاوز 30 سؤالاً في اختبار واحد</div></div>
-            <div class="li"><span class="lic">❌</span><div class="lt">لا تحذف ملفات الوسائط بعد إدراجها</div></div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ٦: إرشادات وتوجيهات الدراسة ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/pan.png" alt="إرشادات وتوجيهات الدراسة" class="panel-img">
 </div>
 </div>
 
@@ -276,24 +182,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p7">
 <div class="pbar"><div class="pic">📝</div><div><h2>التقويم والاختبار التحصيلي</h2><p>كل ما تحتاج معرفته عن الاختبار</p></div><div class="pbdg">٧ من ٨</div></div>
 <div class="pbody">
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">📊</span><span class="cht">معلومات الاختبار</span></div><div class="cb">
-            <div class="li"><span class="lic">⏱️</span><div class="lt">المدة: <strong>90 دقيقة</strong> فور الدخول</div></div>
-            <div class="li"><span class="lic">❓</span><div class="lt">اختيار متعدد <strong>وصح وخطأ</strong></div></div>
-            <div class="li"><span class="lic">🔄</span><div class="lt">الأسئلة تظهر <strong>عشوائياً</strong></div></div>
-            <div class="li"><span class="lic">💯</span><div class="lt">النجاح: <strong>50%</strong> فأكثر</div></div>
-            <div class="li"><span class="lic">📈</span><div class="lt">النتيجة تظهر <strong>فور الإنهاء</strong></div></div>
-            <div class="li"><span class="lic">🔁</span><div class="lt">الإعادة وفق تعليمات <strong>المشرف</strong></div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">🎯</span><span class="cht">خطوات تأدية الاختبار</span></div><div class="cb">
-            <div class="flow">
-                <div class="fs"><div class="fn">١</div><div><div class="ft">تحقق من اتصالك بالإنترنت</div><div class="fd">اتصال مستقر ضروري لحفظ إجاباتك</div></div></div>
-                <div class="fs"><div class="fn">٢</div><div><div class="ft">اضغط "التقويم" وابدأ الاختبار</div><div class="fd">المؤقت يبدأ فور ظهور السؤال الأول</div></div></div>
-                <div class="fs"><div class="fn">٣</div><div><div class="ft">أجب بهدوء وراجع قبل التسليم</div><div class="fd">يمكن مراجعة الإجابات قبل الإنهاء</div></div></div>
-                <div class="fs"><div class="fn">٤</div><div><div class="ft">اضغط "إنهاء" وتابع نتيجتك</div><div class="fd">تظهر نتيجتك فورياً مع الملاحظات</div></div></div>
-            </div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ٧: التقويم والاختبار التحصيلي ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/tes.png" alt="التقويم والاختبار التحصيلي" class="panel-img">
 </div>
 </div>
 
@@ -301,21 +192,9 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p8">
 <div class="pbar"><div class="pic">🎉</div><div><h2>التواصل والدعم الأكاديمي</h2><p>أنت جاهز للانطلاق!</p></div><div class="pbdg">٨ من ٨</div></div>
 <div class="pbody">
-    <div class="g2">
-        <div class="card"><div class="ch"><span class="chi">📞</span><span class="cht">قنوات التواصل</span></div><div class="cb">
-            <div class="li"><span class="lic">📧</span><div class="lt"><strong>البريد:</strong> عبر صفحة "اتصل بنا"</div></div>
-            <div class="li"><span class="lic">📢</span><div class="lt"><strong>الإعلانات:</strong> تابع التحديثات دوماً</div></div>
-            <div class="li"><span class="lic">🕐</span><div class="lt"><strong>الاستجابة:</strong> خلال 24 ساعة</div></div>
-            <div class="li"><span class="lic">📝</span><div class="lt">اذكر <strong>اسم الدرس ورقمه</strong> بوضوح</div></div>
-        </div></div>
-        <div class="card"><div class="ch"><span class="chi">🚀</span><span class="cht">ملخص رحلتك</span></div><div class="cb">
-            <div class="li"><span class="lic">🌟</span><div class="lt">تعرّفت على البيئة ومكوناتها</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">تأكدت من جاهزية متطلباتك</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">عرفت طريقة التنقل والدراسة</div></div>
-            <div class="li"><span class="lic">✅</span><div class="lt">اطلعت على المحتوى والتقويم</div></div>
-            <div class="li"><span class="lic">🚀</span><div class="lt"><strong>انطلق الآن للمحتوى التعليمي!</strong></div></div>
-        </div></div>
-    </div>
+    <!-- ======= الصورة ٨: التواصل والدعم الأكاديمي ======= -->
+    <!-- ضع مسار الصورة بين علامتي التنصيص في src="" -->
+    <img src="img/cont.png" alt="التواصل والدعم الأكاديمي" class="panel-img">
 </div>
 <div class="pnav"><button class="nb np" onclick="go(7)">→ السابق</button><div style="font-size:10px;color:var(--mu);font-weight:700">🎉 أنهيت دليل المتعلم!</div></div>
 </div>

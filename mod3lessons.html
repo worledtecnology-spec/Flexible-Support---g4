@@ -235,7 +235,7 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden; b
 <body>
 
 <div class="header">
-  <div class="support-badge">✨ نمط الدعم المرن </div>
+  <div class="support-badge">✨ نمط الدعم المرن  </div>
   <div class="header-title">بيئة التعلم المدمج لتنمية مهارات إنتاج الدروس التفاعلية لدى طلاب كلية التربية النوعية</div>
 </div>
 
@@ -326,7 +326,7 @@ let supTimer   = null;
 let supItems   = [];   /* كل العناصر المضافة */
 let supIdx     = 0;    /* الجملة القادمة */
 let supMsgs    = [];   /* مصفوفة الجمل الحالية */
-let currentSupMessages = []; /* الجمل الخاصة بالقسم الحالي */
+let currentSupMessages = [];
 const INTERVAL = 3500; /* ms بين كل جملة */
 const MAX_SHOW = 4;    /* أقصى عدد مرئي قبل الإزالة */
 
@@ -363,7 +363,6 @@ function openCardSupport() {
   if (openBtn)  openBtn.style.display  = 'none';
   if (closeBtn) closeBtn.style.display = 'inline-flex';
   if (subtitle) subtitle.textContent   = 'توجيهات وإرشادات مستمرة';
-  /* امسح أي items قديمة */
   supItems = [];
   supIdx   = 0;
   if (list) list.innerHTML = '';
@@ -450,9 +449,19 @@ function startStripSupport(messages) {
 }
 
 /* ── helpers ── */
-function makeTextCard(sec) {
+function makeTextCard(sec, lid) {
+  const downloadBtn = (lid === '2')
+    ? `<div style="padding:8px;background:#f8fafc;display:flex;justify-content:center;">
+        <a href="files/w1.docx" download
+           style="display:flex;align-items:center;gap:6px;background:var(--primary);color:#fff;
+                  text-decoration:none;font-size:12px;font-weight:700;padding:9px 16px;
+                  border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.12);">
+          <span style="font-size:14px;">📥</span> انقر هنا لتحميل ملف خطوات تثبيت البرنامج
+        </a>
+      </div>`
+    : '';
   return `<div class="card">
-    <div class="card-hdr"><div class="dot"></div> صورة المحتوى</div>
+    <div class="card-hdr"><div class="dot"></div>  المحتوى</div>
     <div style="flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:8px;background:#f8fafc;">
       ${sec.imageSrc
         ? `<img src="${sec.imageSrc}" alt="محتوى الدرس"
@@ -463,10 +472,15 @@ function makeTextCard(sec) {
           </div>`
       }
     </div>
+    ${downloadBtn}
   </div>`;
 }
 
 function getYouTubeID(url) {
+  /* يستخرج الـ ID من أي صيغة YouTube:
+     https://youtu.be/ID
+     https://www.youtube.com/watch?v=ID
+     https://www.youtube.com/embed/ID          */
   const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^?&\s]{11})/);
   return m ? m[1] : null;
 }
@@ -589,7 +603,7 @@ function showContent(lid, sk, btn) {
     currentSupMessages = sec.support || [];
     panel.innerHTML = bc + hdr + `
       <div class="split" style="flex:1;min-height:0;">
-        ${makeTextCard(sec)}
+        ${makeTextCard(sec, lid)}
         <div class="con-right">
           <div class="sup-strip" id="supStripWrap">
             <!-- الحالة المغلقة: زر عرض الدعم -->
@@ -668,7 +682,7 @@ function showContent(lid, sk, btn) {
         </div>
 
       </div>`;
-  } /* ← نهاية else if activity */
+  }
 
   if (activeBtn) activeBtn.classList.remove('active');
   btn.classList.add('active');

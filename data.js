@@ -187,7 +187,7 @@ const LESSONS_DATA = {
           <obj n="ج">قائمة المهام Task Pane: على اليمين، توفر: هيكلية الإطار، مكتبة العنصر، الأشكال التلقائية، السيناريوهات، ونماذج التصميم.</obj>
         `,
         imageSrc: "img/mod3lesson2.png",   /* ← ضع رابط صورة المحتوى هنا، مثال: "images/lesson2.jpg" */
-        videoSrc: "https://www.youtube.com/embed/cnQqtSgr3wc?si=XlDB_PHNa8458Vio", videoType: "youtube",
+        videoSrc: "https://www.youtube.com/embed/DHQ6G5_GZdQ?si=zZknpQOOn17W2pEL", videoType: "youtube",
         note: "احفظ بيانات التفعيل في مكان آمن للرجوع إليها عند الحاجة.",
         support: [
           "فصل الإنترنت أثناء التفعيل خطوة أساسية لا تتجاهلها.",

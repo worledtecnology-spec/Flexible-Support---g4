@@ -100,13 +100,44 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden; b
 .card-body.compact .obj-item { padding: 4px 0; gap: 7px; }
 .card-body.compact .obj-n { width: 20px; height: 20px; font-size: 10px; margin-top: 1px; }
 
+/* ══════════ الإنفوجرافيك (تصميم HTML أصلي بدل الصور) ══════════ */
+.info-card { background: linear-gradient(180deg,#f8fffe,#fff); }
+.info-card .card-hdr { background: linear-gradient(135deg,var(--primary),var(--teal)); color:#fff; }
+.info-body { flex:1; overflow-y:auto; padding: 10px 14px; }
+.info-stage { display:flex; gap:10px; position:relative; padding-bottom: 12px; }
+.info-stage::before { content:''; position:absolute; right:15px; top:34px; bottom:0; width:2px; background: linear-gradient(180deg,var(--primary-light),transparent); }
+.info-stage:last-child::before { display:none; }
+.info-num { flex-shrink:0; width:32px; height:32px; border-radius:10px; background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff; font-size:14px; font-weight:900; display:flex; align-items:center; justify-content:center; box-shadow:0 3px 10px rgba(10,133,69,.28); z-index:1; }
+.info-stage-body { flex:1; min-width:0; padding-top:3px; }
+.info-stage-title { font-size:13px; font-weight:900; color:var(--primary); margin-bottom:5px; }
+.info-pt { display:flex; align-items:flex-start; gap:7px; font-size:12px; font-weight:700; color:var(--text); line-height:1.7; padding:3px 0; }
+.info-pt .info-ico { flex-shrink:0; width:20px; height:20px; border-radius:6px; background:#ecfdf5; color:var(--accent); font-size:10.5px; font-weight:900; display:flex; align-items:center; justify-content:center; margin-top:1px; }
+.info-para { font-size:12px; font-weight:700; color:var(--text); line-height:1.8; background:#f8fffe; border:1px solid #e6faf3; border-radius:9px; padding:7px 10px; margin:2px 0; }
+
+/* ══════════ عارض المراحل بالتنقّل (بدون سكرول) ══════════ */
+.stage-top { display:flex; align-items:center; justify-content:space-between; padding:8px 12px 6px; flex-shrink:0; }
+.stage-dots { display:flex; gap:5px; }
+.stage-dot { width:7px; height:7px; border-radius:50%; background:#d1fae5; transition:all .25s; }
+.stage-dot.active { width:20px; border-radius:5px; background:var(--primary); }
+.stage-counter { font-size:11px; font-weight:800; color:var(--text-muted,#6b7280); }
+.stage-content { padding:0 14px; }
+.stage-content .info-stage { padding-bottom:0 !important; }
+.stage-content .info-stage::before { display:none; }
+.stage-nav { display:flex; justify-content:space-between; gap:8px; padding:8px 12px; flex-shrink:0; border-top:1px solid #f1f5f9; }
+.stage-btn { flex:1; background:#f0fdf9; color:var(--primary); border:1.5px solid #a7f3d0; border-radius:10px; padding:8px 10px; font-family:'Cairo',sans-serif; font-size:12px; font-weight:800; cursor:pointer; transition:all .2s; }
+.stage-btn:hover:not(:disabled) { background:var(--primary); color:#fff; }
+.stage-btn:disabled { opacity:.35; cursor:not-allowed; }
+.stage-btn.primary { background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff; border-color:transparent; }
+.stage-btn.primary:hover:not(:disabled) { box-shadow:0 4px 14px rgba(10,133,69,.35); transform:translateY(-1px); }
+.info-card .stage-counter { color:var(--primary); opacity:.85; }
+
 /* ══ SUPPORT CARD ══ */
 .sup-card { background: #f0fdf9; border: 2px solid #a7f3d0; border-radius: 13px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 2px 12px rgba(27,107,90,.1); min-height: 0; }
 .sup-card-hdr { background: linear-gradient(135deg, var(--primary), var(--accent)); padding: 10px 14px; display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
 .sup-card-ico { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .sup-card-hdr-txt strong { color: #fff; font-size: 12px; font-weight: 800; display: block; }
 .sup-card-hdr-txt span   { color: rgba(255,255,255,.8); font-size: 10px; }
-.sup-list { flex: 1; overflow: hidden; padding: 10px; display: flex; flex-direction: column; gap: 6px; position: relative; }
+.sup-list { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 10px; display: flex; flex-direction: column; gap: 6px; position: relative; }
 
 /* كل جملة دعم */
 .sup-item {
@@ -146,9 +177,9 @@ body { display: flex; flex-direction: column; height: 100vh; overflow: hidden; b
 .con-right { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
 
 /* شريط الدعم فوق الفيديو */
-.sup-strip { background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 11px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-height: 54px; }
+.sup-strip { background: linear-gradient(135deg, var(--primary), var(--accent)); border-radius: 11px; padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-shrink: 0; min-height: 54px; max-height: 100px; }
 .sup-strip-ico { font-size: 18px; flex-shrink: 0; }
-.sup-strip-msg { flex: 1; color: #fff; font-size: 12.5px; line-height: 1.6; transition: opacity .4s ease, transform .35s ease; }
+.sup-strip-msg { flex: 1; color: #fff; font-size: 12.5px; line-height: 1.6; transition: opacity .4s ease, transform .35s ease; max-height: 80px; overflow-y: auto; align-self: center; }
 
 /* VIDEO */
 .video-card { flex: 1; min-height: 0; display: flex; flex-direction: column; }
@@ -234,6 +265,130 @@ function parseContent(raw) {
     .trim();
 }
 
+/* ══════════════════════════════════════════════════════════════
+   عارض المراحل بالتنقل (Stage Viewer) — بدون أي سكرول
+   ══════════════════════════════════════════════════════════════ */
+window._stageViewers = {};
+
+function parseStages(raw) {
+  if (!raw) return [];
+  const parts = raw.split(/<h4>/).map(s => s.trim()).filter(Boolean);
+  return parts.map((part, i) => {
+    const m = part.match(/^([\s\S]*?)<\/h4>/);
+    const title = m ? m[1].trim() : `المرحلة ${i + 1}`;
+    const body  = m ? part.slice(m[0].length) : part;
+    return { title, body };
+  });
+}
+
+function renderStageBody(body, mode) {
+  if (mode === 'info') {
+    return body
+      .replace(/<obj\s+n="([^"]+)">([\s\S]*?)<\/obj>/g,
+        (_, n, t) => `<div class="info-pt"><div class="info-ico">${n}</div><div>${t.trim()}</div></div>`)
+      .replace(/<p>([\s\S]*?)<\/p>/g, (_, t) => `<div class="info-para">${t.trim()}</div>`);
+  }
+  return body.replace(/<obj\s+n="([^"]+)">([\s\S]*?)<\/obj>/g,
+    (_, n, t) => `<div class="obj-item"><div class="obj-n">${n}</div><div>${t.trim()}</div></div>`);
+}
+
+function buildStageViewer(raw, mode, viewerId) {
+  const stages = parseStages(raw);
+  if (!stages.length) return '<div class="info-body"><p>لا يوجد محتوى بعد.</p></div>';
+
+  if (stages.length <= 2) {
+    delete window._stageViewers[viewerId];
+    if (mode === 'info') {
+      const html = stages.map((s, i) => `
+        <div class="info-stage">
+          <div class="info-num">${i + 1}</div>
+          <div class="info-stage-body">
+            <div class="info-stage-title">${s.title}</div>
+            ${renderStageBody(s.body, 'info')}
+          </div>
+        </div>`).join('');
+      return `<div class="info-body">${html}</div>`;
+    }
+    const html = stages.map(s => `<h4>${s.title}</h4>${renderStageBody(s.body, 'text')}`).join('');
+    return `<div class="card-body">${html}</div>`;
+  }
+
+  window._stageViewers[viewerId] = { stages, idx: 0, mode };
+  const dotsHTML = stages.map((_, i) =>
+    `<span class="stage-dot${i === 0 ? ' active' : ''}" data-i="${i}"></span>`).join('');
+
+  return `
+    <div class="stage-viewer ${mode === 'info' ? 'info-body' : 'card-body'}" style="display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;">
+      <div class="stage-top">
+        <div class="stage-dots">${dotsHTML}</div>
+        <div class="stage-counter" id="${viewerId}-counter">المرحلة <b>1</b> من ${stages.length}</div>
+      </div>
+      <div class="stage-content" id="${viewerId}-content" style="flex:1;overflow:hidden;"></div>
+      <div class="stage-nav">
+        <button class="stage-btn" id="${viewerId}-prev" onclick="stageGo('${viewerId}',-1)" disabled>→ السابق</button>
+        <button class="stage-btn primary" id="${viewerId}-next" onclick="stageGo('${viewerId}',1)">التالي ←</button>
+      </div>
+    </div>`;
+}
+
+function renderStageInto(viewerId) {
+  const st = window._stageViewers[viewerId];
+  if (!st) return;
+  const contentEl = document.getElementById(viewerId + '-content');
+  if (!contentEl) return;
+  const s = st.stages[st.idx];
+
+  if (st.mode === 'info') {
+    contentEl.innerHTML = `
+      <div class="info-stage" style="padding-bottom:0;">
+        <div class="info-num">${st.idx + 1}</div>
+        <div class="info-stage-body">
+          <div class="info-stage-title">${s.title}</div>
+          ${renderStageBody(s.body, 'info')}
+        </div>
+      </div>`;
+  } else {
+    contentEl.innerHTML = `<h4 style="margin-top:0;">${s.title}</h4>${renderStageBody(s.body, 'text')}`;
+  }
+
+  document.getElementById(viewerId + '-counter').innerHTML =
+    `المرحلة <b>${st.idx + 1}</b> من ${st.stages.length}`;
+  document.getElementById(viewerId + '-prev').disabled = st.idx === 0;
+  document.getElementById(viewerId + '-next').disabled = st.idx === st.stages.length - 1;
+  document.getElementById(viewerId + '-next').textContent = (st.idx === st.stages.length - 1) ? '✓ انتهت المراحل' : 'التالي ←';
+  const dotsWrap = contentEl.parentElement.querySelector('.stage-dots');
+  if (dotsWrap) {
+    [...dotsWrap.children].forEach((d, i) => d.classList.toggle('active', i === st.idx));
+  }
+}
+
+function stageGo(viewerId, dir) {
+  const st = window._stageViewers[viewerId];
+  if (!st) return;
+  const next = st.idx + dir;
+  if (next < 0 || next >= st.stages.length) return;
+  st.idx = next;
+  renderStageInto(viewerId);
+}
+
+/* ── helpers ── */
+function makeTextCard(sec, lid) {
+  const isInfographic = (parseInt(lid, 10) % 2 === 0);
+  const mode = isInfographic ? 'info' : 'text';
+  const viewerId = 'lessonViewer';
+
+  if (isInfographic) {
+    return `<div class="card info-card">
+      <div class="card-hdr"><div class="dot" style="background:#fff;"></div> 📊 إنفوجرافيك — ملخص الدرس</div>
+      ${buildStageViewer(sec.content, mode, viewerId)}
+    </div>`;
+  }
+
+  return `<div class="card">
+    <div class="card-hdr"><div class="dot"></div> المادة العلمية</div>
+    ${buildStageViewer(sec.content, mode, viewerId)}
+  </div>`;
+}
 function getSec(lid, sk) {
   const r = LESSONS_DATA[lid].sections[sk];
   if (typeof r === 'string') return { content: r, videoSrc:'', videoType:'none', note:'', support:[] };
@@ -273,12 +428,11 @@ function toggleLesson(id) {
    القديمة تتلاشى تدريجياً
 ══════════════════════════════════════ */
 let supTimer   = null;
-let supItems   = [];
-let supIdx     = 0;
-let supMsgs    = [];
+let supItems   = [];   /* كل العناصر المضافة منذ آخر فتح للدعم */
+let supIdx     = 0;    /* رقم العنصر التالي (يستمر بالزيادة، لا يتوقف طالما الدعم مفتوح) */
+let supMsgs    = [];   /* مصفوفة الجمل الأصلية (تتكرر بالدوران بعد انتهائها) */
 let currentSupMessages = [];
-const INTERVAL = 3500;
-const MAX_SHOW = 4;
+const SUP_INTERVAL = 2000; /* ms بين كل نصيحة دعم جديدة تُضاف */
 
 function stopSupport() {
   clearInterval(supTimer);
@@ -287,6 +441,10 @@ function stopSupport() {
   supIdx   = 0;
   supMsgs  = [];
   currentSupMessages = [];
+}
+
+function _nearBottom(el) {
+  return (el.scrollHeight - el.scrollTop - el.clientHeight) < 40;
 }
 
 /* ── فتح/إغلاق الدعم في الشريط (محتوى) ── */
@@ -333,79 +491,55 @@ function closeCardSupport() {
   if (subtitle) subtitle.textContent   = 'اضغط لبدء التوجيهات';
 }
 
-/* ── وضع الكارت (نشاط) ── */
+/* ── وضع الكارت (نشاط): بعد الفتح، الدعم يستمر بالإضافة طوال ما يظل مفتوحًا
+   ولا يتوقف ولا تُحذف أي نقطة سابقة — الطالب يقدر يمرّر لأعلى ليراجع كل ما سبق ── */
 function startCardSupport(messages) {
   const container = document.getElementById('supList');
   if (!container || !messages.length) return;
   supMsgs = messages;
   supIdx  = 0;
 
-  const add = () => {
-    /* أنشئ العنصر وأضفه للأسفل */
+  const addNext = () => {
+    const stick = _nearBottom(container);
     const div = document.createElement('div');
     div.className = 'sup-item';
-    div.innerHTML = `<div class="sup-num">${supIdx + 1}</div><span>${supMsgs[supIdx]}</span>`;
+    div.innerHTML = `<div class="sup-num">${supIdx + 1}</div><span>${supMsgs[supIdx % supMsgs.length]}</span>`;
     container.appendChild(div);
     supItems.push(div);
-
-    /* شغّل الـ animation بعد frame */
     requestAnimationFrame(() => requestAnimationFrame(() => div.classList.add('visible')));
-
-    /* حدّث شفافية كل العناصر */
-    supItems.forEach((el, i) => {
-      const age = supItems.length - 1 - i; /* 0 = الأحدث */
-      el.classList.remove('old-1','old-2','old-3');
-      if (age === 1) el.classList.add('old-1');
-      else if (age === 2) el.classList.add('old-2');
-      else if (age >= 3) { el.classList.add('old-3'); }
-    });
-
-    /* احذف العناصر التي تجاوزت الحد بعد fade */
-    if (supItems.length > MAX_SHOW) {
-      const gone = supItems.shift();
-      setTimeout(() => gone.remove(), 500);
-    }
-
-    supIdx = (supIdx + 1) % supMsgs.length;
+    if (stick) container.scrollTop = container.scrollHeight;
+    supIdx++;
   };
 
-  add(); /* أول جملة فوراً */
-  supTimer = setInterval(add, INTERVAL);
+  addNext();
+  supTimer = setInterval(addNext, SUP_INTERVAL);
 }
 
-/* ── وضع الشريط (محتوى) ── */
+/* ── وضع الشريط (محتوى): نفس مبدأ الإضافة المستمرة بعد الفتح، داخل شريط قابل للتمرير ── */
 function startStripSupport(messages) {
   const el = document.getElementById('supStripMsg');
   if (!el || !messages.length) return;
   supMsgs = messages;
   supIdx  = 0;
-
-  const show = () => {
-    el.style.opacity   = '0';
-    el.style.transform = 'translateY(6px)';
-    setTimeout(() => {
-      el.textContent     = supMsgs[supIdx];
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-      supIdx = (supIdx + 1) % supMsgs.length;
-    }, 380);
-  };
-
-  el.textContent     = supMsgs[0];
+  el.innerHTML = '';
   el.style.opacity   = '1';
   el.style.transform = 'translateY(0)';
-  supIdx = 1;
-  supTimer = setInterval(show, INTERVAL);
+
+  const addNext = () => {
+    const stick = _nearBottom(el);
+    const line = document.createElement('div');
+    line.style.cssText = `padding:3px 0;${supIdx>0 ? 'border-top:1px solid rgba(255,255,255,.18);margin-top:3px;' : ''}`;
+    line.textContent = '• ' + supMsgs[supIdx % supMsgs.length];
+    el.appendChild(line);
+    if (stick) el.scrollTop = el.scrollHeight;
+    supIdx++;
+  };
+
+  addNext();
+  supTimer = setInterval(addNext, SUP_INTERVAL);
 }
 
 /* ── helpers ── */
-function makeTextCard(sec) {
-  return `<div class="card">
-    <div class="card-hdr"><div class="dot"></div> المادة العلمية</div>
-    <div class="card-body">${parseContent(sec.content)}</div>
-  </div>`;
-}
-
 function getYouTubeID(url) {
   const m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^?&\s]{11})/);
   return m ? m[1] : null;
@@ -458,7 +592,7 @@ function showContent(lid, sk, btn) {
     currentSupMessages = sec.support || [];
     panel.innerHTML = bc + hdr + `
       <div class="split" style="flex:1;min-height:0;">
-        ${makeTextCard(sec)}
+        ${makeTextCard(sec, lid)}
         <div class="con-right">
           <div class="sup-strip" id="supStripWrap">
             <!-- الحالة المغلقة: زر عرض الدعم -->
@@ -480,41 +614,61 @@ function showContent(lid, sk, btn) {
           </div>
         </div>
       </div>` + noteBar;
+    setTimeout(() => renderStageInto('lessonViewer'), 0);
   }
 
-  /* ── نشاط: عمودان — أيمن: تعليمات + إجابة + زر وسط | أيسر: دعم كامل الارتفاع ── */
+  /* ── نشاط: عمودان — أيمن: وصف + محتوى + إجابة | أيسر: بطاقة الدعم مع زر الفتح/الغلق ── */
   else if (sk === 'activity') {
     currentSupMessages = sec.support || [];
-    panel.innerHTML = bc + hdr + `
-      <div class="split" style="flex:1;min-height:0;">
+    /* بانر الانتقال لأداء الاختبار التحصيلي البعدي — يظهر فقط بعد آخر درس (الدرس 3) */
+    const postTestBanner = (lid === '3') ? `
+      <a href="#" onclick="alert('⚠️ لم يتم إضافة رابط الاختبار التحصيلي البعدي بعد. يرجى مراجعة المشرف.'); return false;"
+        style="flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:8px;
+        background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;text-decoration:none;
+        padding:9px 14px;border-radius:12px;font-size:12.5px;font-weight:800;margin-bottom:8px;
+        box-shadow:0 3px 12px rgba(124,58,237,.3);">
+        🎉 أحسنت! أنهيت جميع دروس الموديول الرابع — 🏁 انتقل لأداء الاختبار التحصيلي البعدي
+      </a>
+      <!-- ★ ضع رابط الاختبار التحصيلي البعدي هنا: عدّل السطر أعلاه بإضافة href="رابط الاختبار" واحذف onclick ★ -->` : '';
 
-        <!-- ══ العمود الأيمن: تعليمات + مساحة الإجابة ══ -->
-        <div style="display:flex;flex-direction:column;gap:10px;min-height:0;overflow:hidden;">
+    panel.innerHTML = bc + hdr + postTestBanner + `
+      <div class="split" style="flex:1;min-height:0;grid-template-columns:7fr 3fr;">
 
-          <!-- تعليمات النشاط -->
-          <div class="card" style="flex-shrink:0;max-height:42%;min-height:0;">
-            <div class="card-hdr"><div class="dot gold"></div> تعليمات النشاط</div>
+        <!-- ══ العمود الأيمن: وصف النشاط + محتوى النشاط + مساحة الإجابة ══ -->
+        <div style="display:flex;flex-direction:column;gap:8px;min-height:0;overflow:hidden;">
+
+          <!-- 1) وصف النشاط -->
+          <div class="card" style="flex-shrink:0;">
+            <div class="card-hdr"><div class="dot" style="background:#0891b2;"></div> 📋 وصف النشاط</div>
+            <div class="card-body compact" style="padding:8px 12px;font-size:12.5px;line-height:1.8;color:#374151;">${sec.desc || ''}</div>
+          </div>
+
+          <!-- 2) محتوى النشاط (المطلوب تنفيذه) -->
+          <div class="card" style="flex-shrink:0;max-height:34%;min-height:0;">
+            <div class="card-hdr"><div class="dot gold"></div> ✅ محتوى النشاط — المطلوب منك</div>
             <div class="card-body compact" style="overflow-y:auto;">${parseContent(sec.content)}</div>
           </div>
 
-          <!-- مساحة الإجابة + زر التسليم في المنتصف -->
+          <!-- 3) مساحة الإجابة + تعليمات التسليم + زر التسليم -->
           <div class="card" style="flex:1;min-height:0;display:flex;flex-direction:column;position:relative;">
-            <div class="card-hdr"><div class="dot" style="background:#7c3aed;"></div> إجابة الطالب</div>
+            <div class="card-hdr"><div class="dot" style="background:#7c3aed;"></div> ✍️ إجابة الطالب</div>
+            <div style="padding:6px 12px 0;font-size:11px;color:#6b7280;flex-shrink:0;">
+              🧭 تعليمات التسليم: اكتب إجابتك في المساحة أدناه، ثم اضغط زر «تسليم الإجابة». يمكنك تعديلها في أي وقت قبل الانتقال للدرس التالي.
+            </div>
             <textarea id="activityAnswer" placeholder="اكتب إجابتك هنا..."
-              style="flex:1;width:100%;resize:none;border:none;border-top:1px solid #f1f5f9;padding:46px 14px;font-family:'Cairo',sans-serif;font-size:13px;line-height:1.9;color:#1f2937;outline:none;background:transparent;min-height:0;"
+              style="flex:1;width:100%;resize:none;border:none;border-top:1px solid #f1f5f9;padding:14px;font-family:'Cairo',sans-serif;font-size:13px;line-height:1.9;color:#1f2937;outline:none;background:transparent;min-height:0;margin-top:6px;"
               onfocus="this.style.background='#fafffe'" onblur="this.style.background='transparent'"></textarea>
-            <button onclick="submitToWhatsApp('${lid}','${lesson.title}')"
-              style="position:absolute;bottom:50%;left:50%;transform:translate(-50%,50%);
-                     background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;
-                     border-radius:50px;padding:10px 22px;font-family:'Cairo',sans-serif;
-                     font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;
-                     justify-content:center;gap:7px;white-space:nowrap;
-                     box-shadow:0 4px 16px rgba(37,211,102,.45);
-                     transition:transform .2s,box-shadow .2s;z-index:10;"
-              onmouseover="this.style.boxShadow='0 6px 20px rgba(37,211,102,.6)';this.style.transform='translate(-50%,50%) translateY(-2px)'"
-              onmouseout="this.style.boxShadow='0 4px 16px rgba(37,211,102,.45)';this.style.transform='translate(-50%,50%)'">
-              <span style="font-size:17px;">💬</span> تسليم النشاط عبر واتساب
-            </button>
+            <div style="padding:8px 12px;flex-shrink:0;display:flex;justify-content:center;">
+              <button onclick="submitToWhatsApp('${lid}','${lesson.title}')" id="submitActBtn"
+                style="background:linear-gradient(135deg,#1b6b5a,#0a8545);color:#fff;border:none;
+                       border-radius:50px;padding:10px 26px;font-family:'Cairo',sans-serif;
+                       font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;
+                       justify-content:center;gap:7px;white-space:nowrap;
+                       box-shadow:0 4px 16px rgba(10,133,69,.35);
+                       transition:transform .2s,box-shadow .2s;">
+                <span style="font-size:16px;">✅</span> تسليم الإجابة
+              </button>
+            </div>
           </div>
 
         </div>
@@ -534,7 +688,7 @@ function showContent(lid, sk, btn) {
               <button id="supCardCloseBtn" class="sup-close-btn" onclick="closeCardSupport()" style="display:none;">✕ إغلاق</button>
             </div>
           </div>
-          <div class="sup-list" id="supList" style="flex:1;overflow:hidden;display:none;"></div>
+          <div class="sup-list" id="supList" style="flex:1;overflow-y:auto;display:none;"></div>
         </div>
 
       </div>`;
@@ -545,7 +699,7 @@ function showContent(lid, sk, btn) {
   activeBtn = btn;
 }
 
-/* ── تسليم النشاط عبر واتساب ── */
+/* ── تسليم الإجابة (تُرسل عبر واتساب) ── */
 function submitToWhatsApp(lid, lessonTitle) {
   const answer = (document.getElementById('activityAnswer') || {}).value || '';
   if (!answer.trim()) {

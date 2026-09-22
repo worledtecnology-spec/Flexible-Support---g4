@@ -21,8 +21,9 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     background: var(--bg-main);
     color: var(--text-main);
     font-family: 'Cairo', sans-serif;
@@ -31,31 +32,36 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* ========== HEADER ========== */
 .header {
     background: var(--bg-secondary);
     padding: 7px 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
     position: relative;
     border-bottom: 2px solid #14b8a6;
     flex-shrink: 0;
 }
 .header-title {
-    font-size: 16px;
+    font-size: clamp(12px, 1.8vw, 16px);
     font-weight: 700;
     color: #fff;
-    max-width: 70%;
-    margin: 0 auto;
+    flex: 1 1 260px;
+    max-width: 100%;
+    margin: 0;
     line-height: 1.5;
+    order: 1;
+    overflow-wrap: anywhere;
 }
 .support-badge {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
     background: var(--accent);
     color: #fff;
     padding: 1px 16px;
@@ -63,6 +69,9 @@ body {
     font-size: 13px;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(10,133,69,0.35);
+    flex-shrink: 0;
+    order: 2;
+    white-space: nowrap;
 }
 
 /* ========== NAV ========== */
@@ -103,7 +112,8 @@ body {
     justify-content: center;
     padding: 4px 20px;
     gap: 14px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* ========== SECTION TITLE ========== */
@@ -224,6 +234,7 @@ body {
 
 .mod-info {
     flex: 1;
+    min-width: 0;
     padding-right: 18px;
     text-align: right;
 }
@@ -241,12 +252,14 @@ body {
     color: var(--primary);
     line-height: 1.35;
     margin-bottom: 4px;
+    overflow-wrap: anywhere;
 }
 .mod-desc {
     font-size: clamp(11px, 1.4vw, 13px);
     color: var(--text-muted);
     font-weight: 600;
     line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
 .mod-arrow {
@@ -312,6 +325,8 @@ body {
     padding: 32px 28px 28px;
     width: 340px;
     max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     animation: modalPop 0.35s cubic-bezier(0.34,1.56,0.64,1) both;
@@ -423,6 +438,15 @@ body {
     .mod-img-circle { width: 64px; height: 64px; min-width: 64px; }
     .mod-arrow { width: 32px; height: 32px; min-width: 32px; font-size: 15px; }
     .lock-badge { left: 56px; width: 26px; height: 26px; font-size: 12px; }
+    .section-title { margin-top: -40px; }
+}
+/* شاشات قصيرة (أو تكبير Zoom عالٍ يقلّص الارتفاع الفعّال) — نمنع الهامش السالب الكبير من دفع العنوان خارج الظهور */
+@media (max-height: 700px) {
+    .section-title { margin-top: -40px; }
+}
+@media (max-height: 480px) {
+    .section-title { margin-top: 0; }
+    .page-content { justify-content: flex-start; padding-top: 10px; }
 }
 </style>
 </head>

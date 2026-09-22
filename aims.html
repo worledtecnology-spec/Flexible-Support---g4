@@ -22,8 +22,9 @@
 
 html, body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     background: var(--bg-main);
     color: var(--text-main);
     font-family: 'Cairo', sans-serif;
@@ -32,7 +33,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .page-content {
@@ -40,32 +41,38 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* ========== الهيدر ========== */
 .header {
     background: var(--bg-secondary);
     padding: 7px 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
     position: relative;
     border-bottom: 2px solid #14b8a6;
 }
 
 .header-title {
-    font-size: 18px;
+    font-size: clamp(13px, 1.9vw, 18px);
     font-weight: 700;
     color: #ffffff;
-    max-width: 70%;
-    margin: 0 auto;
+    flex: 1 1 260px;
+    max-width: 100%;
+    margin: 0;
     line-height: 1.5;
+    order: 1;
+    overflow-wrap: anywhere;
 }
 
 .support-badge {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
     background: var(--accent);
     color: #fff;
     padding: 1px 16px;
@@ -73,6 +80,9 @@ body {
     font-size: 14px;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(10,133,69,0.35);
+    flex-shrink: 0;
+    order: 2;
+    white-space: nowrap;
 }
 
 /* ========== الناف بار ========== */
@@ -206,7 +216,8 @@ body {
   align-items: center;
   justify-content: flex-start; /* بدل center */
   padding: 10px 20px 0; /* قلل المسافة من فوق */
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
 }
 

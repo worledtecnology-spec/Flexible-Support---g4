@@ -32,33 +32,39 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
 }
 
 /* ===== HEADER ===== */
 .header {
     background: var(--bg-secondary);
     padding: 7px 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
     position: relative;
     border-bottom: 2px solid #14b8a6;
     flex-shrink: 0;
 }
 
 .header-title {
-    font-size: 16px;
+    font-size: clamp(12px, 1.8vw, 16px);
     font-weight: 700;
     color: #fff;
-    max-width: 70%;
-    margin: 0 auto;
+    flex: 1 1 260px;
+    max-width: 100%;
+    margin: 0;
     line-height: 1.5;
+    order: 1;
+    overflow-wrap: anywhere;
 }
 
 .support-badge {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
     background: var(--accent);
     color: #fff;
     padding: 1px 16px;
@@ -66,6 +72,9 @@ body {
     font-size: 13px;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(10,133,69,0.35);
+    flex-shrink: 0;
+    order: 2;
+    white-space: nowrap;
 }
 
 /* ===== NAV ===== */
@@ -99,16 +108,18 @@ body {
     box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
 
+.nav:empty { display: none; }
+
 /* ===== MAIN ===== */
 .main {
     flex: 1;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 2px;
     position: relative;
     overflow: hidden;
-    margin-top: -100px;
 }
 
 /* decorative circles */
@@ -128,9 +139,11 @@ body {
     background: #fff;
     border: 3px solid var(--border-color);
     border-radius: 28px;
-    padding: 2px 40px;
+    padding: clamp(2px, 1.5vh, 18px) clamp(20px, 5vw, 40px);
     width: 100%;
     max-width: 460px;
+    max-height: 100%;
+    overflow-y: auto;
     box-shadow: 0 12px 40px rgba(27,75,74,0.14);
     position: relative;
     z-index: 1;
@@ -144,21 +157,22 @@ body {
 
 /* lock icon */
 .lock-icon {
-    width: 40px;
-    height: 40px;
+    width: clamp(28px, 5vh, 40px);
+    height: clamp(28px, 5vh, 40px);
     background: linear-gradient(135deg, #1b6b5a, #0a8545);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 18px;
-    font-size: 30px;
+    margin: 0 auto clamp(6px, 2vh, 18px);
+    font-size: clamp(18px, 3.5vh, 30px);
     box-shadow: 0 6px 18px rgba(27,107,90,0.3);
+    flex-shrink: 0;
 }
 
 .card-title {
     text-align: center;
-    font-size: 22px;
+    font-size: clamp(16px, 3vh, 22px);
     font-weight: 900;
     color: var(--primary);
     margin-bottom: 4px;
@@ -166,23 +180,23 @@ body {
 
 .card-subtitle {
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(11px, 1.8vh, 14px);
     color: var(--text-muted);
-    margin-bottom: 28px;
+    margin-bottom: clamp(8px, 3vh, 28px);
     font-weight: 600;
 }
 
 /* ===== FORM ===== */
 .form-group {
-    margin-bottom: 4px;
+    margin-bottom: clamp(3px, 1vh, 4px);
 }
 
 .form-label {
     display: block;
-    font-size: 14px;
+    font-size: clamp(12px, 1.8vh, 14px);
     font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 7px;
+    margin-bottom: clamp(3px, 1vh, 7px);
 }
 
 .input-wrapper {
@@ -201,7 +215,7 @@ body {
 
 .form-input {
     width: 100%;
-    padding: 12px 16px 12px 44px;
+    padding: clamp(8px, 1.8vh, 12px) 16px clamp(8px, 1.8vh, 12px) 44px;
     border: 2px solid #d1fae5;
     border-radius: 12px;
     font-size: 15px;
@@ -233,7 +247,7 @@ body {
     border: 1.5px solid #fca5a5;
     border-radius: 10px;
     padding: 10px 14px;
-    margin-bottom: 18px;
+    margin-bottom: clamp(8px, 2vh, 18px);
     color: #dc2626;
     font-size: 13px;
     font-weight: 700;
@@ -250,12 +264,12 @@ body {
 /* ===== BUTTON ===== */
 .login-btn {
     width: 100%;
-    padding: 14px;
+    padding: clamp(9px, 2vh, 14px);
     background: linear-gradient(135deg, #1b6b5a 0%, #0a8545 100%);
     color: #fff;
     border: none;
     border-radius: 14px;
-    font-size: 17px;
+    font-size: clamp(14px, 2.2vh, 17px);
     font-family: 'Cairo', sans-serif;
     font-weight: 800;
     cursor: pointer;
@@ -284,21 +298,22 @@ body {
 /* ===== FOOTER NOTE ===== */
 .card-note {
     text-align: center;
-    margin-top: 20px;
+    margin-top: clamp(6px, 2vh, 20px);
     font-size: 12px;
     color: var(--text-muted);
     font-weight: 600;
 }
 
-/* ===== MOBILE ===== */
+/* ===== MOBILE / شاشات قصيرة ===== */
 @media (max-width: 768px) {
-    .support-badge { position: static; transform: none; display: inline-block; margin-bottom: 8px; }
     .header { padding-top: 10px; }
     .header-title { max-width: 100%; font-size: 14px; }
     .nav a { font-size: 11px; padding: 4px 9px; }
-    .login-card { padding: 28px 22px; border-radius: 20px; }
-    .main { overflow: auto; }
-    body, html { overflow: auto; }
+    .login-card { border-radius: 20px; }
+}
+@media (max-height: 560px) {
+    .card-note { display: none; }
+    .card-subtitle { margin-bottom: 4px; }
 }
 </style>
 </head>

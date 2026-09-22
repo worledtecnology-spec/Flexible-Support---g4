@@ -22,8 +22,9 @@
 
 html, body {
     margin: 0;
-    height: 100%;
-    overflow: hidden;
+    min-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
     background: var(--bg-main);
     color: var(--text-main);
     font-family: 'Cairo', sans-serif;
@@ -32,7 +33,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 
@@ -41,25 +42,30 @@ body {
 .header {
     background: var(--bg-secondary);
     padding: 7px 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
     position: relative;
     border-bottom: 2px solid #14b8a6;
 }
 
 .header-title {
-    font-size: 18px;
+    font-size: clamp(13px, 1.9vw, 18px);
     font-weight: 700;
     color: #ffffff;
-    max-width: 70%;
-    margin: 0 auto;
+    flex: 1 1 260px;
+    max-width: 100%;
+    margin: 0;
     line-height: 1.5;
+    order: 1;
+    overflow-wrap: anywhere;
 }
 
 .support-badge {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
+    position: static;
+    transform: none;
     background: var(--accent);
     color: #fff;
     padding: 1px 16px;
@@ -67,6 +73,9 @@ body {
     font-size: 14px;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(10,133,69,0.35);
+    flex-shrink: 0;
+    order: 2;
+    white-space: nowrap;
 }
 
 /* ========== الناف بار ========== */
@@ -108,7 +117,8 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 55px 20px 20px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .contact-card {
@@ -246,7 +256,7 @@ body {
     <div class="contact-links">
 
       <!-- واتساب -->
-      <a class="contact-btn" href="https://wa.me/201001234567" target="_blank">
+      <a class="contact-btn" href="https://wa.me/201106413664" target="_blank">
         <div class="contact-ico-wrap whatsapp">
           <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.16 1.6 5.97L0 24l6.22-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52zm-8.52 18.4a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.69.93.99-3.59-.24-.37A9.9 9.9 0 0 1 2.1 12c0-5.46 4.44-9.9 9.9-9.9 2.64 0 5.12 1.03 6.99 2.9A9.84 9.84 0 0 1 21.9 12c0 5.46-4.44 9.88-9.9 9.88zm5.42-7.41c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.34.22-.64.07a8.1 8.1 0 0 1-2.38-1.47 8.9 8.9 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.6.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37s-1.04 1.01-1.04 2.47 1.06 2.86 1.21 3.06c.15.2 2.08 3.17 5.04 4.45.7.3 1.25.48 1.68.62.7.22 1.34.19 1.85.12.56-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.34z"/>
@@ -255,8 +265,8 @@ body {
         <span>واتساب</span>
       </a>
 
-      <!-- جيميل -->
-      <a class="contact-btn" href="mailto:slwynbwy@gmail.com" target="_blank">
+      <!-- جيميل: يفتح Gmail عبر المتصفح بدل تطبيق البريد الافتراضي (Outlook) -->
+      <a class="contact-btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=Salwastudents730@gmail.com" target="_blank" rel="noopener">
         <div class="contact-ico-wrap gmail">
           <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
             <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.641l8.073-6.148C21.69 2.28 24 3.434 24 5.457z"/>

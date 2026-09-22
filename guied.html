@@ -8,7 +8,7 @@
 <style>
 :root{--bg2:#1b4a4a;--pr:#1b6b5a;--ac:#0a8545;--tl:#2dd4bf;--tm:#1f2937;--mu:#6b7280;--nv:#1b5e5e;--bd:#d1fae5;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;width:100%;font-family:'Cairo',sans-serif;background:#f0f4f4;color:var(--tm);overflow:hidden;}
+html,body{height:100%;min-height:100%;width:100%;font-family:'Cairo',sans-serif;background:#f0f4f4;color:var(--tm);overflow:auto;}
 body{display:flex;flex-direction:column;}
 .header{background:var(--bg2);padding:5px 16px;text-align:center;position:relative;border-bottom:2px solid #14b8a6;flex-shrink:0;}
 .ht{font-size:13px;font-weight:700;color:#fff;line-height:1.4;}
@@ -91,7 +91,30 @@ body{display:flex;flex-direction:column;}
 .cta{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--pr),var(--ac));color:#fff;text-decoration:none;padding:9px 22px;border-radius:50px;font-size:12px;font-weight:900;font-family:'Cairo',sans-serif;box-shadow:0 4px 14px rgba(10,133,69,.35);transition:all .25s;}
 .cta:hover{transform:translateY(-2px);}
 .panel-img{width:100%;height:auto;max-height:75%;object-fit:contain;object-position:top;display:block;border-radius:8px;}
-.pbody{overflow:hidden !important;align-items:flex-start;}
+
+/* ══ RESPONSIVE / ZOOM SAFETY ══ */
+/* الهيدر: Flex بدل absolute حتى لا يتداخل الشارة مع العنوان عند التكبير أو الشاشات الضيقة */
+.header{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;position:relative;}
+.sbdg{position:static;transform:none;order:2;flex-shrink:0;}
+.ht{flex:1 1 260px;max-width:100%;order:1;}
+
+/* السماح بالتفاف الجداول أفقياً فقط عند الضرورة بدل كسر الصفحة */
+.tbl-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+@media (max-width: 1024px){
+  .g3{grid-template-columns:1fr 1fr;}
+}
+@media (max-width: 780px){
+  .page{flex-direction:column;overflow:visible;}
+  .sidebar{width:100%;max-height:38vh;border-left:none;border-bottom:3px solid var(--pr);}
+  .content{width:100%;}
+  .g2,.g3{grid-template-columns:1fr;}
+}
+@media (max-width: 480px){
+  .ht{font-size:12px;}
+  .sbdg{font-size:10px;padding:1px 9px;}
+  .nav a{font-size:10px;padding:3px 8px;}
+}
 </style>
 </head>
 <body>
@@ -262,11 +285,13 @@ body{display:flex;flex-direction:column;}
 <div class="panel" id="p5">
 <div class="pbar"><div class="pic">📖</div><div><h2>دليل الموديولات والمحتوى التعليمي</h2><p>نظرة تفصيلية على الموديولات</p></div><div class="pbdg">٥ من ٨</div></div>
 <div class="pbody">
+    <div class="tbl-wrap">
     <table class="gtbl">
       <tr><th>الموديول</th><th>عدد الدروس</th><th>يغطّي</th></tr>
       <tr><td><span class="badge bg">الموديول الثالث</span></td><td>7 دروس</td><td>أساسيات CourseLab: من التثبيت والتصميم الأول وحتى إدراج الأسئلة والاختبارات التفاعلية.</td></tr>
       <tr><td><span class="badge bb">الموديول الرابع</span></td><td>3 دروس</td><td>نشر الدرس التفاعلي، التغذية الراجعة لمرحلة الإنتاج، ومرحلة التقويم الختامي.</td></tr>
     </table>
+    </div>
     <div class="g2">
       <div class="card">
         <div class="ch"><span class="chi">🔒</span><span class="cht">الدخول للموديولات</span></div>

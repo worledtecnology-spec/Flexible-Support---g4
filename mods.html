@@ -2,6 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<script src="../Salwa-Nabawi---Blended-Learning-Environment/env.js" data-site="g4"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>الموديولات </title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -464,7 +465,7 @@ body {
 <div class="nav">
     <a href="home.html" target="_self">🏠 الرئيسية</a>
     <a href="aims.html" target="_self">🎯 أهداف البيئة</a>
-    <a href="guied.html" target="_self">📚 دليل التعلم</a>
+    <a href="guied.html" target="_self">📘 دليل المتعلم</a>
     <a href="mods.html" class="active" target="_self">📖 المحتوى التعليمي</a>
     <a href="poster.html" target="_self">📢 لوحة الإعلانات</a>
     <a href="contact.html" target="_self">📞 اتصل بنا</a>
@@ -490,7 +491,7 @@ body {
             <div class="mod-info">
                 <div class="mod-number">الموديول الثالث</div>
                 <div class="mod-title">مرحلة إنتاج الدروس التفاعلية باستخدام برنامج CourseLab</div>
-                <div class="mod-desc">مهارات تصميم الرسومات والعناصر التفاعلية في الدروس الرقمية</div>
+                <div class="mod-desc">سبعة دروس: من الخلفية النظرية لبرنامج CourseLab حتى إدراج الأسئلة والاختبارات</div>
             </div>
             <div class="mod-arrow">←</div>
         </div>
@@ -504,7 +505,7 @@ body {
             <div class="mod-info">
                 <div class="mod-number">الموديول الرابع</div>
                 <div class="mod-title">مرحلة نشر وتطبيق وتقويم الدروس التفاعلية</div>
-                <div class="mod-desc">مهارات إنتاج الفيديو التعليمي والمحتوى المتعدد الوسائط</div>
+                <div class="mod-desc">ثلاثة دروس: نشر الدرس التفاعلي، التغذية الراجعة، التقويم</div>
             </div>
             <div class="mod-arrow">←</div>
         </div>
@@ -547,7 +548,15 @@ body {
     let currentMod  = null;
     let currentPage = null;
 
+    /* بعد التوجيه للنمط المناسب يُفتح المحتوى تلقائيًا بدون كلمات مرور للموديولات.
+       لإعادة تفعيل كلمات مرور الموديولات اجعل القيمة التالية true */
+    const MODULE_PASSWORDS_ENABLED = false;
+    if (!MODULE_PASSWORDS_ENABLED) document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.lock-badge').forEach(function(b){ b.textContent = '🔓'; });
+        document.querySelectorAll('.mod-card').forEach(function(c){ c.classList.add('unlocked'); });
+    });
     function openModal(modKey, page) {
+        if (!MODULE_PASSWORDS_ENABLED) { window.location.href = page; return; }
         if (unlocked[modKey]) {
             window.location.href = page;
             return;
